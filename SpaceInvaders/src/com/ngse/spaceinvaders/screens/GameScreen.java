@@ -30,12 +30,12 @@ public class GameScreen extends Screen {
 
 	public Alien[] aliens = new Alien[999];
 	public int numberOfAliens;
-	
+
 	public AlienBullet[] alienbullets = new AlienBullet[999];
 	public int numberOfAlienBullets;
 
 	public AlienBoss alienboss;
-	
+
 	public Upgrade[] upgrades = new Upgrade[999];
 	public int numberOfUpgrades;
 
@@ -76,30 +76,45 @@ public class GameScreen extends Screen {
 		// Do game logic
 		// this.doGameLogic();
 
-		// Draw the gameobjects
+		/*
+		 * Draw the gameobjects
+		 */
+		// Player stuff
 		player.draw(g2);
+		SpaceInvadersGame.log("There are " + numberOfPlayerBullets
+				+ " of playerbullets to draw");
+		;
+		for (int i = 0; i <= numberOfPlayerBullets; i++) {
+			if (playerbullets[i] == null) {
+				SpaceInvadersGame.log("Null playerbullet");
+				break;
+			}
+			playerbullets[i].draw(g2);
+		}
 	}
-	
+
 	/*
 	 * Adding Objects to Screen
 	 */
 	public void addPlayerBullet(PlayerBullet pb) {
 		numberOfPlayerBullets++;
-		playerbullets[numberOfPlayerBullets-1] = pb;
+		playerbullets[numberOfPlayerBullets - 1] = pb;
 	}
+
 	public void addAlien(Alien alien) {
 		numberOfAliens++;
-		aliens[numberOfAliens-1] = alien;
+		aliens[numberOfAliens - 1] = alien;
 	}
+
 	public void addAlienBullet(AlienBullet ab) {
 		numberOfAlienBullets++;
-		alienbullets[numberOfAlienBullets-1] = ab;
+		alienbullets[numberOfAlienBullets - 1] = ab;
 	}
+
 	public void addUpgrade(Upgrade upgrade) {
 		numberOfUpgrades++;
-		upgrades[numberOfUpgrades-1] = upgrade;
+		upgrades[numberOfUpgrades - 1] = upgrade;
 	}
-	
 
 	/*
 	 * KeyEvents

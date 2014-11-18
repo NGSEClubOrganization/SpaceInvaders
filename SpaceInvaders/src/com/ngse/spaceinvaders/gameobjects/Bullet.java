@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.Polygon;
-
 import java.awt.image.BufferedImage;
+
+import com.ngse.spaceinvaders.SpaceInvadersGame;
 
 /**
  * Base class for all bullets.
@@ -18,14 +19,12 @@ public class Bullet extends GameObject {
 	// //width and height of bullet
 	// protected int width = 6;
 	// protected int height = 15;
-	
-	
-	//angle the bullet is pointing
+
+	// angle the bullet is pointing
 	protected double angle;
-	
+
 	// who shot the bullet, and final values indicating which means which
 	protected Owner owner;
-
 
 	/**
 	 * Initiates bullet at a given point
@@ -64,7 +63,8 @@ public class Bullet extends GameObject {
 
 	}
 
-	public void move() {// moves up at a given speed
+	public void moveUpdate() {// moves up at a given speed
+		SpaceInvadersGame.log("Updating movement for a bullet");
 		y += dy;
 		x += dx;
 	}
@@ -75,8 +75,7 @@ public class Bullet extends GameObject {
 
 		// rotates the Graphics2D to draw the bullet at the correct angle and
 		// point
-		g2.rotate(Math.PI / 2 - angle, this.getXCoord(),
-				this.getYCoord());
+		g2.rotate(Math.PI / 2 - angle, this.getXCoord(), this.getYCoord());
 
 		// draws a red rectangle if no image is found
 		if (this.image != null) {
@@ -133,7 +132,7 @@ public class Bullet extends GameObject {
 	}
 
 	public double getAngle() {
-	return angle;
+		return angle;
 	}
 
 	/**

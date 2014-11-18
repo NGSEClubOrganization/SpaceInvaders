@@ -8,8 +8,4 @@ public class PlayerBullet extends Bullet {
 		owner = Owner.PLAYER;
 	}
 
-	public void moveUpdate() {
-		this.setX(this.getX() + this.getDx());
-	}
-
 }
