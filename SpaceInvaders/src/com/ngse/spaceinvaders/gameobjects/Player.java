@@ -12,8 +12,10 @@ public class Player extends GameObject {
 	public Player(double x, double y, double direction, double speed,
 			BufferedImage image) {
 		super(x, y, direction, speed, image);
-		// TODO Auto-generated constructor stub
+		playerweapon = new PlayerWeapon(this);
 	}
+
+	public PlayerWeapon playerweapon;
 
 	private double boundX = SpaceInvadersGame.frame.getWidth()
 			- this.getImage().getWidth();
@@ -27,6 +29,7 @@ public class Player extends GameObject {
 	private IDirection xAxis = IDirection.NON;
 	private IDirection yAxis = IDirection.NON;
 
+	// TODO do i need this?
 	private enum PlayerBulletType {
 		NORMAL
 	}
@@ -168,9 +171,7 @@ public class Player extends GameObject {
 	 * Shooter Method
 	 */
 	private void shoot(PlayerBulletType pbt) {
-		PlayerBullet pb = new PlayerBullet(this.getX(), this.getY(), Config.PLAYER_BULLET_SPEED, Math.PI/2);
-		
-		GameScreen gamescreen = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-		gamescreen.addPlayerBullet(pb);
+		playerweapon.fire();
 	}
+	
 }
