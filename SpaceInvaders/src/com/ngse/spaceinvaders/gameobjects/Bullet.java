@@ -7,6 +7,7 @@ import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.screens.GameScreen;
 
 /**
  * Base class for all bullets.
@@ -152,4 +153,8 @@ public class Bullet extends GameObject {
 	// public int getHeight() {
 	// return height;
 	// }
+	
+	
+	
+	
 }
