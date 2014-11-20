@@ -7,7 +7,11 @@ public class AlienBoss extends GameObject {
 	public AlienBoss(double x, double y, double direction, double speed,
 			BufferedImage image) {
 		super(x, y, direction, speed, image);
-		// TODO Auto-generated constructor stub
+		// TODO
+	}
+
+	public void moveUpdate() {
+		// TODO
 	}
 
 }

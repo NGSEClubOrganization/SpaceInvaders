@@ -67,6 +67,8 @@ public class Bullet extends GameObject {
 		SpaceInvadersGame.log("Updating movement for a bullet");
 		y += dy;
 		x += dx;
+		
+		
 	}
 
 	public void draw(Graphics2D g2) {

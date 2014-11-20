@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.gameobjects.Alien;
@@ -25,19 +27,26 @@ public class GameScreen extends Screen {
 	private GameScreen gamescreen;
 
 	public Player player;
-	public PlayerBullet[] playerbullets = new PlayerBullet[999];
-	public int numberOfPlayerBullets;
 
-	public Alien[] aliens = new Alien[999];
-	public int numberOfAliens;
+	// public PlayerBullet[] playerbullets = new PlayerBullet[999];
+	// public int numberOfPlayerBullets;
 
-	public AlienBullet[] alienbullets = new AlienBullet[999];
-	public int numberOfAlienBullets;
+	public List<PlayerBullet> playerBullets;
 
-	public AlienBoss alienboss;
+	// public Alien[] aliens = new Alien[999];
+	// public int numberOfAliens;
+	// public AlienBullet[] alienbullets = new AlienBullet[999];
+	// public int numberOfAlienBullets;
 
-	public Upgrade[] upgrades = new Upgrade[999];
-	public int numberOfUpgrades;
+	public List<Alien> aliens;
+	public List<AlienBullet> alienBullets;
+
+	public AlienBoss alienBoss;
+
+	// public Upgrade[] upgrades = new Upgrade[999];
+	// public int numberOfUpgrades;
+
+	public List<Upgrade> upgrades;
 
 	private enum GameState {
 		RUNNING, PAUSE
@@ -58,8 +67,11 @@ public class GameScreen extends Screen {
 				- player.getImage().getWidth() / 2);
 		player.setY(SpaceInvadersGame.frame.getHeight() / 2
 				- player.getImage().getHeight() / 2);
-		numberOfPlayerBullets = 0;
-		// Initialize Aliens
+		// Initialize other GameObjects
+		playerBullets = new LinkedList<PlayerBullet>();
+		aliens = new LinkedList<Alien>();
+		alienBullets = new LinkedList<AlienBullet>();
+		upgrades = new LinkedList<Upgrade>();
 	}
 
 	/*
@@ -73,47 +85,31 @@ public class GameScreen extends Screen {
 		g2.fillRect(0, 0, SpaceInvadersGame.frame.getWidth(),
 				SpaceInvadersGame.frame.getHeight());
 
-		// Do game logic
+		// TODO: doGameLogic();
 		// this.doGameLogic();
 
 		/*
 		 * Draw the gameobjects
 		 */
-		// Player stuff
 		player.draw(g2);
-		SpaceInvadersGame.log("There are " + numberOfPlayerBullets
-				+ " of playerbullets to draw");
-		;
-		for (int i = 0; i <= numberOfPlayerBullets; i++) {
-			if (playerbullets[i] == null) {
-				SpaceInvadersGame.log("Null playerbullet");
-				break;
-			}
-			playerbullets[i].draw(g2);
+		for (PlayerBullet pb : playerBullets) {
+			if (!pb.equals(null))
+				pb.draw(g2);
 		}
-	}
-
-	/*
-	 * Adding Objects to Screen
-	 */
-	public void addPlayerBullet(PlayerBullet pb) {
-		numberOfPlayerBullets++;
-		playerbullets[numberOfPlayerBullets - 1] = pb;
-	}
-
-	public void addAlien(Alien alien) {
-		numberOfAliens++;
-		aliens[numberOfAliens - 1] = alien;
-	}
-
-	public void addAlienBullet(AlienBullet ab) {
-		numberOfAlienBullets++;
-		alienbullets[numberOfAlienBullets - 1] = ab;
-	}
-
-	public void addUpgrade(Upgrade upgrade) {
-		numberOfUpgrades++;
-		upgrades[numberOfUpgrades - 1] = upgrade;
+		for (Alien a : aliens) {
+			if (!a.equals(null))
+				a.draw(g2);
+		}
+		for (AlienBullet ab : alienBullets) {
+			if (!ab.equals(null))
+				ab.draw(g2);
+		}
+		if (!alienBoss.equals(null))
+			alienBoss.draw(g2);
+		for (Upgrade u : upgrades) {
+			if (!u.equals(null))
+				u.draw(g2);
+		}
 	}
 
 	/*
@@ -184,20 +180,36 @@ public class GameScreen extends Screen {
 	/*
 	 * ActionPerformed
 	 */
+
 	// Constant Timer Updates
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		doGameLogic();
+		// TODO: doGameLogic();
+		// doGameLogic();
 		repaint();
 	}
 
+	// GameLogics
 	private void doGameLogic() {
-		// TODO:
 		// Update all GameObject Positions
-
 		player.moveUpdate();
-		for (int i = 0; i <= numberOfPlayerBullets - 1; i++) {
-			playerbullets[i].moveUpdate();
+		for (PlayerBullet pb : playerBullets) {
+			if (!pb.equals(null))
+				pb.moveUpdate();
+		}
+		for (Alien a : aliens) {
+			if (!a.equals(null))
+				a.moveUpdate();
+		}
+		for (AlienBullet ab : alienBullets) {
+			if (!ab.equals(null))
+				ab.moveUpdate();
+		}
+		if (!alienBoss.equals(null))
+			alienBoss.moveUpdate();
+		for (Upgrade u : upgrades) {
+			if (!u.equals(null))
+				u.moveUpdate();
 		}
 	}
 
