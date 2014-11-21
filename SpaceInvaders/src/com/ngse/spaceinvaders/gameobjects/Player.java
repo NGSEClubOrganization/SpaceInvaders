@@ -29,17 +29,10 @@ public class Player extends GameObject {
 	private IDirection xAxis = IDirection.NON;
 	private IDirection yAxis = IDirection.NON;
 
-	// TODO do i need this?
-	private enum PlayerBulletType {
-		NORMAL
-	}
-
-	private PlayerBulletType playerBulletType = PlayerBulletType.NORMAL;
-
 	public void moveUpdate() {
 
-		SpaceInvadersGame.log("DX: " + String.valueOf(this.getDx()));
-		SpaceInvadersGame.log("DY: " + String.valueOf(this.getDy()));
+		// SpaceInvadersGame.log("DX: " + String.valueOf(this.getDx()));
+		// SpaceInvadersGame.log("DY: " + String.valueOf(this.getDy()));
 
 		// Bounds check
 		if (checkInsideBounds()) {
@@ -68,7 +61,9 @@ public class Player extends GameObject {
 			this.xAxis = IDirection.POS;
 			break;
 		case KeyEvent.VK_SPACE:
-			shoot(playerBulletType);
+			SpaceInvadersGame.log("Space bar pressed ; shooting bullet");
+			shoot();
+			break;
 		}
 	}
 
@@ -132,12 +127,12 @@ public class Player extends GameObject {
 		if (this.getDx() <= Config.PLAYER_MAX_SPEED) {
 			if (xAxis.equals(IDirection.POS)) {
 				// Right
-				SpaceInvadersGame.log("Got direction: Right; Going Right");
+				// SpaceInvadersGame.log("Got direction: Right; Going Right");
 				this.setDx((this.getDx() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
 			} else if (xAxis.equals(IDirection.NEG)) {
 				// Left
-				SpaceInvadersGame.log("Got direction: Left; Going left");
+				// SpaceInvadersGame.log("Got direction: Left; Going left");
 				this.setDx((this.getDx() - Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
 			} else if (xAxis.equals(IDirection.NON)) {
@@ -149,12 +144,12 @@ public class Player extends GameObject {
 		if (this.getDy() <= Config.PLAYER_MAX_SPEED) {
 			if (yAxis.equals(IDirection.NEG)) {
 				// Down
-				SpaceInvadersGame.log("Got direction: Down; Going Down");
+				// SpaceInvadersGame.log("Got direction: Down; Going Down");
 				this.setDy((this.getDy() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
 			} else if (yAxis.equals(IDirection.POS)) {
 				// Up
-				SpaceInvadersGame.log("Got direction: Up; Going Up");
+				// SpaceInvadersGame.log("Got direction: Up; Going Up");
 				this.setDy((this.getDy() - Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
 			} else if (yAxis.equals(IDirection.NON)) {
@@ -170,8 +165,8 @@ public class Player extends GameObject {
 	/*
 	 * Shooter Method
 	 */
-	private void shoot(PlayerBulletType pbt) {
+	private void shoot() {
 		playerweapon.fire();
 	}
-	
+
 }

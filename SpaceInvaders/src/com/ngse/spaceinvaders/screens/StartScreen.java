@@ -112,17 +112,17 @@ public class StartScreen extends Screen {
 
 		switch (cursorPosition) {
 		case 1:
-			//switch to gamescreen
+			// switch to gamescreen
 			System.out.println("Trying to switch to gamescreen");
 			SpaceInvadersGame.setScreen(new GameScreen());
 			break;
 		case 2:
-			//switch to optionsscreen
+			// switch to optionsscreen
 			System.out.println("Trying to switch to optionsscreen");
 			SpaceInvadersGame.setScreen(new OptionsScreen());
 			break;
 		case 3:
-			//quit
+			// quit
 			System.exit(0);
 			break;
 		}
@@ -138,9 +138,10 @@ public class StartScreen extends Screen {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		Mp3Player player = new Mp3Player();
-		player.setFilename("lazer");
-		player.play();
+		/*
+		 * Mp3Player player = new Mp3Player();
+		 * player.setFilename("lazer");player.play();
+		 */
 	}
 
 }
