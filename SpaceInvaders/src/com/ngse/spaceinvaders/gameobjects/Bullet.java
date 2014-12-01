@@ -7,7 +7,6 @@ import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
-import com.ngse.spaceinvaders.screens.GameScreen;
 
 /**
  * Base class for all bullets.
@@ -21,8 +20,8 @@ public class Bullet extends GameObject {
 	// protected int width = 6;
 	// protected int height = 15;
 
-	// angle the bullet is pointing
-	protected double angle;
+	// direction the bullet is pointing
+	protected double direction;
 
 	// who shot the bullet, and final values indicating which means which
 	protected Owner owner;
@@ -37,16 +36,17 @@ public class Bullet extends GameObject {
 	 * @param speed
 	 *            the absolute speed of the bullet
 	 * @param direction
-	 *            the angle at which the bullet is moving. Give in radians
+	 *            the direction at which the bullet is moving. Give in radians
 	 * @param file
 	 *            the image that will be the bullet
 	 */
 
-	public Bullet(double x, double y, double angle, double speed,
+	public Bullet(double x, double y, double speed, double direction,
 			BufferedImage img) {
-		super(x, y, speed * Math.cos(angle), speed * -1 * Math.sin(angle), img);
+		super(x, y, speed * Math.cos(direction), speed * -1
+				* Math.sin(direction), img);
 		// initialise instance variables
-		this.angle = angle;
+		this.direction = direction;
 	}
 
 	// stolen from the internet
@@ -64,24 +64,24 @@ public class Bullet extends GameObject {
 
 	}
 
-	public void moveUpdate() {// moves up at a given speed
-		SpaceInvadersGame.log("Updating movement for a bullet");
+	// moves up at a given speed
+	public void moveUpdate() {
 		y += dy;
 		x += dx;
-		
-		
+
 	}
 
 	public void draw(Graphics2D g2) {
 		// saves normal rotation/position of the Graphics2D
 		AffineTransform old = g2.getTransform();
 
-		// rotates the Graphics2D to draw the bullet at the correct angle and
+		// rotates the Graphics2D to draw the bullet at the correct direction
+		// and
 		// point
-		g2.rotate(Math.PI / 2 - angle, this.getXCoord(), this.getYCoord());
+		g2.rotate(Math.PI / 2 - direction, this.getXCoord(), this.getYCoord());
 
-		// draws a red rectangle if no image is found
-		if (this.image != null) {
+		// draws a red rectdirection if no image is found
+		if (this.image == null) {
 			g2.setColor(Color.RED);
 			g2.fillRect(this.getXCoord(), this.getYCoord(),
 					this.image.getWidth(), this.image.getHeight());
@@ -105,22 +105,22 @@ public class Bullet extends GameObject {
 	 * @return Polygon that defines the space the bullet contains
 	 */
 	public Polygon getBulletHitbox() {
-		double easyAngle = Math.PI / 2 - angle;
+		double easydirection = Math.PI / 2 - direction;
 		int width = this.image.getWidth();
 		int height = this.getImage().getHeight();
 
 		int[] xCoords = {
 				(int) x,
-				(int) (x + width * Math.cos(easyAngle)),
-				(int) (x + width * Math.cos(easyAngle) - height
-						* Math.sin(easyAngle)),
-				(int) (x - height * Math.sin(easyAngle)) };
+				(int) (x + width * Math.cos(easydirection)),
+				(int) (x + width * Math.cos(easydirection) - height
+						* Math.sin(easydirection)),
+				(int) (x - height * Math.sin(easydirection)) };
 		int[] yCoords = {
 				(int) y,
-				(int) (y + width * Math.sin(easyAngle)),
-				(int) (y + width * Math.sin(easyAngle) + height
-						* Math.cos(easyAngle)),
-				(int) (y + height * Math.cos(easyAngle)) };
+				(int) (y + width * Math.sin(easydirection)),
+				(int) (y + width * Math.sin(easydirection) + height
+						* Math.cos(easydirection)),
+				(int) (y + height * Math.cos(easydirection)) };
 		Polygon hitbox = new Polygon(xCoords, yCoords, 4);
 		return hitbox;
 	}
@@ -134,8 +134,8 @@ public class Bullet extends GameObject {
 		return (int) x;
 	}
 
-	public double getAngle() {
-		return angle;
+	public double getdirection() {
+		return direction;
 	}
 
 	/**
@@ -153,8 +153,5 @@ public class Bullet extends GameObject {
 	// public int getHeight() {
 	// return height;
 	// }
-	
-	
-	
-	
+
 }

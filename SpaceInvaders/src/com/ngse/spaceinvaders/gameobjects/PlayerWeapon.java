@@ -1,5 +1,6 @@
 package com.ngse.spaceinvaders.gameobjects;
 
+import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
@@ -23,6 +24,12 @@ public class PlayerWeapon {
 	// type is the integer specifying weapon type
 	// it is automatically set to basic on initialization
 	protected int type = BASIC;
+
+	protected double directionUp = Math.PI / 2;
+	protected double directionLeft = Math.PI;
+	protected double directionRight = 0;
+	protected double directionLeft45 = 3 * Math.PI / 4;
+	protected double directionRight45 = Math.PI / 4;
 
 	protected Player player;
 
@@ -75,12 +82,12 @@ public class PlayerWeapon {
 		}
 
 		// Catch for not in gamescreen mode,
-		//	add bullets to gamescreen
+		// add bullets to gamescreen
 		if (SpaceInvadersGame.getCurrentScreen() instanceof GameScreen) {
 			GameScreen gamescreen = (GameScreen) SpaceInvadersGame
 					.getCurrentScreen();
 			for (int i = 0; i <= bullets.length - 1; i++) {
-				gamescreen.addPlayerBullet(bullets[i]);
+				gamescreen.playerBullets.add(bullets[i]);
 			}
 		}
 	}
@@ -91,7 +98,8 @@ public class PlayerWeapon {
 		double y = player.getY();
 		int width = player.getImage().getWidth();
 
-		bullets[0] = new PlayerBullet(x + width / 2, y, .5, Math.PI / 2);
+		bullets[0] = new PlayerBullet(x + width / 2, y,
+				Config.PLAYER_BULLET_SPEED, directionUp);
 		return bullets;
 	}
 
@@ -101,9 +109,12 @@ public class PlayerWeapon {
 		double y = player.getY();
 		int width = player.getImage().getWidth();
 
-		bullets[0] = new PlayerBullet(x + width / 2, y, .5, Math.PI / 2);
-		bullets[1] = new PlayerBullet(x + width, y, .5, Math.PI / 4);
-		bullets[2] = new PlayerBullet(x, y, .5, 3 * Math.PI / 4);
+		bullets[0] = new PlayerBullet(x + width / 2, y,
+				Config.PLAYER_BULLET_SPEED, directionUp);
+		bullets[1] = new PlayerBullet(x + width, y, Config.PLAYER_BULLET_SPEED,
+				directionRight45);
+		bullets[2] = new PlayerBullet(x, y, Config.PLAYER_BULLET_SPEED,
+				directionLeft45);
 		return bullets;
 	}
 
@@ -114,15 +125,22 @@ public class PlayerWeapon {
 		int width = player.getImage().getWidth();
 		int height = player.getImage().getHeight();
 
-		bullets[0] = new PlayerBullet(x + width / 2, y, .5, Math.PI / 2);
-		bullets[1] = new PlayerBullet(x + width, y, .5, Math.PI / 4);
-		bullets[2] = new PlayerBullet(x, y, .5, 3 * Math.PI / 4);
-		bullets[3] = new PlayerBullet(x, y + height / 2, .5, Math.PI);
-		bullets[4] = new PlayerBullet(x, y + height, .5, -3 * Math.PI / 4);
-		bullets[5] = new PlayerBullet(x + width, y + height / 2, .5, 0);
-		bullets[6] = new PlayerBullet(x + width, y + height, .5, -Math.PI / 4);
-		bullets[7] = new PlayerBullet(x + width / 2, y + height, .5,
-				-Math.PI / 2);
+		bullets[0] = new PlayerBullet(x + width / 2, y,
+				Config.PLAYER_BULLET_SPEED, directionUp);
+		bullets[1] = new PlayerBullet(x + width, y, Config.PLAYER_BULLET_SPEED,
+				directionRight45);
+		bullets[2] = new PlayerBullet(x, y, Config.PLAYER_BULLET_SPEED,
+				directionLeft45);
+		bullets[3] = new PlayerBullet(x, y + height / 2,
+				Config.PLAYER_BULLET_SPEED, directionLeft);
+		bullets[4] = new PlayerBullet(x, y + height,
+				Config.PLAYER_BULLET_SPEED, -directionLeft45);
+		bullets[5] = new PlayerBullet(x + width, y + height / 2,
+				Config.PLAYER_BULLET_SPEED, directionRight);
+		bullets[6] = new PlayerBullet(x + width, y + height,
+				Config.PLAYER_BULLET_SPEED, -directionRight45);
+		bullets[7] = new PlayerBullet(x + width / 2, y + height,
+				Config.PLAYER_BULLET_SPEED, -directionUp);
 
 		return bullets;
 	}

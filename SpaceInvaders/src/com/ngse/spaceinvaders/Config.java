@@ -11,7 +11,9 @@ public class Config {
 	public static final double PLAYER_SPEED = 0.80;
 	public static final double PLAYER_MAX_SPEED = 100.00;
 	public static final double PLAYER_FRICTION = .9;
+
+	public static final double PLAYER_BULLET_SPEED = 8.00;
 	
-	public static final double PLAYER_BULLET_SPEED = 10.00;
+	public static final double ALIEN_SPEED = 1.00;
 
 }

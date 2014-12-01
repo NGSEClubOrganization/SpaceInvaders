@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.Timer;
+
+import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.gameobjects.Alien;
 import com.ngse.spaceinvaders.gameobjects.AlienBoss;
@@ -25,6 +28,8 @@ public class GameScreen extends Screen {
 	// well as health, score, etc.
 
 	private GameScreen gamescreen;
+
+	public int GameClock;
 
 	public Player player;
 
@@ -59,6 +64,7 @@ public class GameScreen extends Screen {
 	 */
 	public GameScreen() {
 		this.gamescreen = this;
+		this.GameClock = 0;
 		// Initialize the GameState
 		gameState = GameState.RUNNING;
 		// Initialize the player
@@ -71,6 +77,7 @@ public class GameScreen extends Screen {
 		playerBullets = new LinkedList<PlayerBullet>();
 		aliens = new LinkedList<Alien>();
 		alienBullets = new LinkedList<AlienBullet>();
+		alienBoss = null;
 		upgrades = new LinkedList<Upgrade>();
 	}
 
@@ -104,7 +111,7 @@ public class GameScreen extends Screen {
 			if (!ab.equals(null))
 				ab.draw(g2);
 		}
-		if (!alienBoss.equals(null))
+		if (!(alienBoss == null))
 			alienBoss.draw(g2);
 		for (Upgrade u : upgrades) {
 			if (!u.equals(null))
@@ -185,8 +192,20 @@ public class GameScreen extends Screen {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO: doGameLogic();
-		// doGameLogic();
+		doGameLogic();
 		repaint();
+
+		GameClock++;
+		
+		// Test out adding Aliens 
+		if (GameClock % 50 == 0) {
+			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
+			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
+					1));
+			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
+					0, 2));
+		}
+		
 	}
 
 	// GameLogics
@@ -205,7 +224,7 @@ public class GameScreen extends Screen {
 			if (!ab.equals(null))
 				ab.moveUpdate();
 		}
-		if (!alienBoss.equals(null))
+		if (!(alienBoss == null))
 			alienBoss.moveUpdate();
 		for (Upgrade u : upgrades) {
 			if (!u.equals(null))
