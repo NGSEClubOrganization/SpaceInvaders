@@ -2,6 +2,7 @@ package com.ngse.spaceinvaders.gameobjects;
 
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.ai.AlienSystemAI.AlienPattern;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
@@ -14,7 +15,7 @@ public class Alien extends GameObject {
 	private AlienType type;
 	private GameScreen gamescreen;
 
-	public Alien(double x, double y, double dX, double dY, int alienImageIndex) {
+	public Alien(double x, double y, double dX, double dY, int alienImageIndex, AlienPattern patter) {
 		super(x, y, dX, dY, BufferedImageResource.Aliens[alienImageIndex]);
 		this.gamescreen = (GameScreen) SpaceInvadersGame.getCurrentScreen();
 
