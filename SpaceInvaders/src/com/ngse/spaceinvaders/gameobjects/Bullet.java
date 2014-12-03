@@ -8,7 +8,10 @@ import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+<<<<<<< HEAD
 import com.ngse.spaceinvaders.screens.GameScreen;
+=======
+>>>>>>> refs/remotes/origin/master
 
 /**
  * Base class for all bullets.
@@ -70,8 +73,12 @@ public class Bullet extends GameObject {
 	public void moveUpdate() {
 		y += dy;
 		x += dx;
+<<<<<<< HEAD
 		
 		if (!checkIfOnscreen()) despawn();
+=======
+
+>>>>>>> refs/remotes/origin/master
 	}
 
 	public void draw(Graphics2D g2) {
@@ -156,6 +163,7 @@ public class Bullet extends GameObject {
 	// public int getHeight() {
 	// return height;
 	// }
+<<<<<<< HEAD
 	
 	protected boolean checkIfOnscreen() {
 		boolean bool = !(getBulletHitbox().intersects(new Rectangle(0, 0, SpaceInvadersGame.frame.getWidth(), SpaceInvadersGame.frame.getHeight())));
@@ -167,5 +175,7 @@ public class Bullet extends GameObject {
 		GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
 		gs.remove(this);
 	}
+=======
+>>>>>>> refs/remotes/origin/master
 
 }

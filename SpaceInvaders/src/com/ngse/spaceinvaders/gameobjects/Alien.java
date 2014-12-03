@@ -2,6 +2,7 @@ package com.ngse.spaceinvaders.gameobjects;
 
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.ai.AlienSystemAI.AlienPattern;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 import com.ngse.spaceinvaders.screens.GameScreen;
 

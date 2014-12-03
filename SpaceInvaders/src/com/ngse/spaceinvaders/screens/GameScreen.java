@@ -13,6 +13,7 @@ import javax.swing.Timer;
 
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.ai.AlienSystemAI;
 import com.ngse.spaceinvaders.gameobjects.Alien;
 import com.ngse.spaceinvaders.gameobjects.AlienBoss;
 import com.ngse.spaceinvaders.gameobjects.AlienBullet;
@@ -26,15 +27,18 @@ import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 @SuppressWarnings("serial")
 public class GameScreen extends Screen {
 
-	// Displays all the game's components (player, enemies, bullets, etc.) as
-	// well as health, score, etc.
-
 	private GameScreen gamescreen;
-
 	public int GameClock;
 
+<<<<<<< HEAD
+	public int GameClock;
+
+=======
+	// GameObjects:
+>>>>>>> refs/remotes/origin/master
 	public Player player;
 
+<<<<<<< HEAD
 	// public PlayerBullet[] playerbullets = new PlayerBullet[999];
 	// public int numberOfPlayerBullets;
 
@@ -55,11 +59,27 @@ public class GameScreen extends Screen {
 
 	public List<Upgrade> upgrades;
 
+=======
+	public List<PlayerBullet> playerBullets;
+
+	public List<Alien> aliens;
+	public List<AlienBullet> alienBullets;
+
+	public AlienBoss alienBoss;
+
+	public List<Upgrade> upgrades;
+
+	// AlienSystemAI for this game
+	public AlienSystemAI ASAI;
+	
+	// GameState
+>>>>>>> refs/remotes/origin/master
 	private enum GameState {
 		RUNNING, PAUSE
 	}
 
 	private GameState gameState;
+	
 
 	/*
 	 * Constructor
@@ -68,19 +88,30 @@ public class GameScreen extends Screen {
 		this.gamescreen = this;
 		this.GameClock = 0;
 		// Initialize the GameState
-		gameState = GameState.RUNNING;
+		this.gameState = GameState.RUNNING;
 		// Initialize the player
-		player = new Player(0, 0, 0, 0, BufferedImageResource.Spaceship);
-		player.setX(SpaceInvadersGame.frame.getWidth() / 2
+		this.player = new Player(0, 0, 0, 0, BufferedImageResource.Spaceship);
+		this.player.setX(SpaceInvadersGame.frame.getWidth() / 2
 				- player.getImage().getWidth() / 2);
-		player.setY(SpaceInvadersGame.frame.getHeight() / 2
+		this.player.setY(SpaceInvadersGame.frame.getHeight() / 2
 				- player.getImage().getHeight() / 2);
 		// Initialize other GameObjects
+<<<<<<< HEAD
 		playerBullets = new LinkedList<PlayerBullet>();
 		aliens = new LinkedList<Alien>();
 		alienBullets = new LinkedList<AlienBullet>();
 		alienBoss = null;
 		upgrades = new LinkedList<Upgrade>();
+=======
+		this.playerBullets = new LinkedList<PlayerBullet>();
+		this.aliens = new LinkedList<Alien>();
+		this.alienBullets = new LinkedList<AlienBullet>();
+		this.alienBoss = null;
+		this.upgrades = new LinkedList<Upgrade>();
+
+		// Initialize AI's
+		this.ASAI = new AlienSystemAI();
+>>>>>>> refs/remotes/origin/master
 	}
 
 	/*
@@ -198,6 +229,7 @@ public class GameScreen extends Screen {
 		repaint();
 
 		GameClock++;
+<<<<<<< HEAD
 		
 		// Test out adding Aliens 
 		if (GameClock % 50 == 0) {
@@ -208,6 +240,18 @@ public class GameScreen extends Screen {
 					0, 2));
 		}
 		
+=======
+
+//		// Test out adding Aliens
+//		if (GameClock % 50 == 0) {
+//			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
+//			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
+//					1));
+//			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
+//					0, 2));
+//		}
+
+>>>>>>> refs/remotes/origin/master
 	}
 
 	// GameLogics
@@ -217,6 +261,23 @@ public class GameScreen extends Screen {
 		for (PlayerBullet pb : playerBullets) {
 			if (!pb.equals(null))
 				pb.moveUpdate();
+<<<<<<< HEAD
+=======
+		}
+		for (Alien a : aliens) {
+			if (!a.equals(null))
+				a.moveUpdate();
+		}
+		for (AlienBullet ab : alienBullets) {
+			if (!ab.equals(null))
+				ab.moveUpdate();
+		}
+		if (!(alienBoss == null))
+			alienBoss.moveUpdate();
+		for (Upgrade u : upgrades) {
+			if (!u.equals(null))
+				u.moveUpdate();
+>>>>>>> refs/remotes/origin/master
 		}
 		for (Alien a : aliens) {
 			if (!a.equals(null))

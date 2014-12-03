@@ -171,9 +171,12 @@ public class Player extends GameObject {
 		playerweapon.fire();
 	}
 
+<<<<<<< HEAD
 	public void loseHealth() {
 		// TODO Auto-generated method stub
 		
 	}
 
+=======
+>>>>>>> refs/remotes/origin/master
 }
