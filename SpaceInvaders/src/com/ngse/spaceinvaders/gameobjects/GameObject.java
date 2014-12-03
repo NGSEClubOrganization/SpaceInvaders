@@ -4,6 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.screens.GameScreen;
+
 public class GameObject {
 
 	protected double x, y, dx, dy;
@@ -25,6 +28,7 @@ public class GameObject {
 	}
 
 	protected BufferedImage image;
+	protected boolean exists = true;
 
 	public double getX() {
 		return x;
@@ -114,6 +118,16 @@ public class GameObject {
 
 		g2.drawImage(this.getImage(), null, (int) this.x, (int) this.y);
 
+	}
+	
+	public void despawn() {
+		//GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+		//gs.remove(this);
+		exists = false;
+	}
+	
+	public boolean exists() {
+		return exists ;
 	}
 
 }

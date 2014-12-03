@@ -8,6 +8,8 @@ import com.ngse.spaceinvaders.screens.GameScreen;
 
 public class Alien extends GameObject {
 
+	
+		
 	enum AlienType {
 		BASIC, DUCK, SUICIDE
 	}
@@ -15,7 +17,7 @@ public class Alien extends GameObject {
 	private AlienType type;
 	private GameScreen gamescreen;
 
-	public Alien(double x, double y, double dX, double dY, int alienImageIndex, AlienPattern patter) {
+	public Alien(double x, double y, double dX, double dY, int alienImageIndex) {
 		super(x, y, dX, dY, BufferedImageResource.Aliens[alienImageIndex]);
 		this.gamescreen = (GameScreen) SpaceInvadersGame.getCurrentScreen();
 
@@ -61,4 +63,10 @@ public class Alien extends GameObject {
 		this.type = type;
 	}
 
+	public void die() {
+		// TODO Auto-generated method stub
+		SpaceInvadersGame.log("Alien is despawning.");
+		despawn();
+	}
+	
 }

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import com.ngse.spaceinvaders.ai.AlienSystemAI;
 import com.ngse.spaceinvaders.gameobjects.Alien;
 import com.ngse.spaceinvaders.gameobjects.AlienBoss;
 import com.ngse.spaceinvaders.gameobjects.AlienBullet;
+import com.ngse.spaceinvaders.gameobjects.Bullet;
+import com.ngse.spaceinvaders.gameobjects.GameObject;
 import com.ngse.spaceinvaders.gameobjects.Player;
 import com.ngse.spaceinvaders.gameobjects.PlayerBullet;
 import com.ngse.spaceinvaders.gameobjects.Upgrade;
+import com.ngse.spaceinvaders.handlers.BulletCollisionsHandler;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 
 @SuppressWarnings("serial")
@@ -192,29 +196,65 @@ public class GameScreen extends Screen {
 
 		GameClock++;
 
-//		// Test out adding Aliens
-//		if (GameClock % 50 == 0) {
-//			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
-//			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
-//					1));
-//			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
-//					0, 2));
-//		}
-
+		// Test out adding Aliens
+		if (GameClock % 50 == 0) {
+			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
+			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
+					1));
+			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
+					0, 2));
+		}
 	}
 
 	// GameLogics
 	private void doGameLogic() {
+		//Iterator<PlayerBullet> pbIterate= playerBullets.iterator();
+		
+		List<Alien> removeAliens = new LinkedList<Alien>();
+		List<PlayerBullet> removeBullets = new LinkedList<PlayerBullet>();
+		
+		BulletCollisionsHandler handler = new BulletCollisionsHandler(this);
+		handler.update();
+		
 		// Update all GameObject Positions
 		player.moveUpdate();
+		
+//		while (pbIterate.hasNext()) {
+//			PlayerBullet bullet = pbIterate.next();
+//			bullet.moveUpdate();
+//			if (!bullet.exists()) 
+//				pbIterate.remove();
+//
+//		}
+		
+//		for (Iterator<PlayerBullet> iterator = playerBullets.iterator(); 
+//				iterator.hasNext(); iterator.next().moveUpdate());
+		
 		for (PlayerBullet pb : playerBullets) {
-			if (!pb.equals(null))
+			if (!pb.equals(null)){
 				pb.moveUpdate();
+				if (!pb.exists()) {
+					removeBullets.add(pb);
+				}
+			}
 		}
+		for (PlayerBullet bullet : removeBullets) 
+			playerBullets.remove(bullet);
+		
+		
+		
 		for (Alien a : aliens) {
-			if (!a.equals(null))
+			if (!a.equals(null)){
 				a.moveUpdate();
+				if (!a.exists()) {
+					removeAliens.add(a);
+				}
+			}
 		}
+		for (Alien alien : removeAliens) 
+			aliens.remove(alien);
+		
+		
 		for (AlienBullet ab : alienBullets) {
 			if (!ab.equals(null))
 				ab.moveUpdate();
@@ -225,6 +265,24 @@ public class GameScreen extends Screen {
 			if (!u.equals(null))
 				u.moveUpdate();
 		}
+	}
+
+	
+	
+	public void remove(PlayerBullet object) {
+		playerBullets.remove(object);
+	}
+	public void remove(AlienBullet object) {
+		alienBullets.remove(object);
+	}
+	public void remove(Alien object) {
+		aliens.remove(object);
+	}
+	public void remove(Bullet  object) {
+		playerBullets.remove(object);
+	}
+	public void remove(GameObject  object) {
+		playerBullets.remove(object);
 	}
 
 }

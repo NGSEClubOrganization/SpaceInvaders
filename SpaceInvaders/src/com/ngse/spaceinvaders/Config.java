@@ -1,3 +1,4 @@
+
 package com.ngse.spaceinvaders;
 
 public class Config {
@@ -18,3 +19,4 @@ public class Config {
 	public static final double ALIEN_BULLET_SPEED = 2.00;
 
 }
+
