@@ -2,11 +2,13 @@ package com.ngse.spaceinvaders.gameobjects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.screens.GameScreen;
 
 /**
  * Base class for all bullets.
@@ -68,7 +70,8 @@ public class Bullet extends GameObject {
 	public void moveUpdate() {
 		y += dy;
 		x += dx;
-
+		
+		if (!checkIfOnscreen()) despawn();
 	}
 
 	public void draw(Graphics2D g2) {
@@ -153,5 +156,16 @@ public class Bullet extends GameObject {
 	// public int getHeight() {
 	// return height;
 	// }
+	
+	protected boolean checkIfOnscreen() {
+		boolean bool = !(getBulletHitbox().intersects(new Rectangle(0, 0, SpaceInvadersGame.frame.getWidth(), SpaceInvadersGame.frame.getHeight())));
+		
+		return bool;
+	}
+	
+	protected void despawn() {
+		GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+		gs.remove(this);
+	}
 
 }
