@@ -12,14 +12,12 @@ public class AlienBoss extends GameObject {
 
 	public void moveUpdate() {
 		// TODO
-<<<<<<< HEAD
+		
 	}
 
 	public void die() {
 		// TODO Auto-generated method stub
 		
-=======
->>>>>>> refs/remotes/origin/master
 	}
 
 }
