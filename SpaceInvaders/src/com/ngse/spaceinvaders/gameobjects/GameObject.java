@@ -28,6 +28,7 @@ public class GameObject {
 	}
 
 	protected BufferedImage image;
+	protected boolean exists = true;
 
 	public double getX() {
 		return x;
@@ -119,9 +120,14 @@ public class GameObject {
 
 	}
 	
-	protected void despawn() {
-		GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-		gs.remove(this);
+	public void despawn() {
+		//GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+		//gs.remove(this);
+		exists = false;
+	}
+	
+	public boolean exists() {
+		return exists ;
 	}
 
 }

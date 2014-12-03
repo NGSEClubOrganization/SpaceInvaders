@@ -158,14 +158,16 @@ public class Bullet extends GameObject {
 	// }
 	
 	protected boolean checkIfOnscreen() {
-		boolean bool = !(getBulletHitbox().intersects(new Rectangle(0, 0, SpaceInvadersGame.frame.getWidth(), SpaceInvadersGame.frame.getHeight())));
+		boolean bool = getBulletHitbox().intersects(new Rectangle(0, 0, SpaceInvadersGame.frame.getWidth(), SpaceInvadersGame.frame.getHeight()));
 		
 		return bool;
 	}
 	
-	protected void despawn() {
-		GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-		gs.remove(this);
+	public void despawn() {
+		//GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+		SpaceInvadersGame.log("bullet despawning.");
+		//gs.remove(this);
+		exists = false;
 	}
 
 }

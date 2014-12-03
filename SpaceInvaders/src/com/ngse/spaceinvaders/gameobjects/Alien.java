@@ -65,6 +65,8 @@ public class Alien extends GameObject {
 
 	public void die() {
 		// TODO Auto-generated method stub
+		SpaceInvadersGame.log("Alien is despawning.");
+		despawn();
 	}
 	
 }

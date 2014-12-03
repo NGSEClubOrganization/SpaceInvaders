@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import com.ngse.spaceinvaders.gameobjects.GameObject;
 import com.ngse.spaceinvaders.gameobjects.Player;
 import com.ngse.spaceinvaders.gameobjects.PlayerBullet;
 import com.ngse.spaceinvaders.gameobjects.Upgrade;
+import com.ngse.spaceinvaders.handlers.BulletCollisionsHandler;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 
 @SuppressWarnings("serial")
@@ -30,36 +32,9 @@ public class GameScreen extends Screen {
 	private GameScreen gamescreen;
 	public int GameClock;
 
-<<<<<<< HEAD
-	public int GameClock;
-
-=======
 	// GameObjects:
->>>>>>> refs/remotes/origin/master
 	public Player player;
 
-<<<<<<< HEAD
-	// public PlayerBullet[] playerbullets = new PlayerBullet[999];
-	// public int numberOfPlayerBullets;
-
-	public List<PlayerBullet> playerBullets;
-
-	// public Alien[] aliens = new Alien[999];
-	// public int numberOfAliens;
-	// public AlienBullet[] alienbullets = new AlienBullet[999];
-	// public int numberOfAlienBullets;
-
-	public List<Alien> aliens;
-	public List<AlienBullet> alienBullets;
-
-	public AlienBoss alienBoss;
-
-	// public Upgrade[] upgrades = new Upgrade[999];
-	// public int numberOfUpgrades;
-
-	public List<Upgrade> upgrades;
-
-=======
 	public List<PlayerBullet> playerBullets;
 
 	public List<Alien> aliens;
@@ -73,7 +48,6 @@ public class GameScreen extends Screen {
 	public AlienSystemAI ASAI;
 	
 	// GameState
->>>>>>> refs/remotes/origin/master
 	private enum GameState {
 		RUNNING, PAUSE
 	}
@@ -96,13 +70,6 @@ public class GameScreen extends Screen {
 		this.player.setY(SpaceInvadersGame.frame.getHeight() / 2
 				- player.getImage().getHeight() / 2);
 		// Initialize other GameObjects
-<<<<<<< HEAD
-		playerBullets = new LinkedList<PlayerBullet>();
-		aliens = new LinkedList<Alien>();
-		alienBullets = new LinkedList<AlienBullet>();
-		alienBoss = null;
-		upgrades = new LinkedList<Upgrade>();
-=======
 		this.playerBullets = new LinkedList<PlayerBullet>();
 		this.aliens = new LinkedList<Alien>();
 		this.alienBullets = new LinkedList<AlienBullet>();
@@ -111,7 +78,6 @@ public class GameScreen extends Screen {
 
 		// Initialize AI's
 		this.ASAI = new AlienSystemAI();
->>>>>>> refs/remotes/origin/master
 	}
 
 	/*
@@ -229,9 +195,8 @@ public class GameScreen extends Screen {
 		repaint();
 
 		GameClock++;
-<<<<<<< HEAD
-		
-		// Test out adding Aliens 
+
+		// Test out adding Aliens
 		if (GameClock % 50 == 0) {
 			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
 			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
@@ -239,50 +204,57 @@ public class GameScreen extends Screen {
 			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
 					0, 2));
 		}
-		
-=======
-
-//		// Test out adding Aliens
-//		if (GameClock % 50 == 0) {
-//			gamescreen.aliens.add(new Alien(0, 100, Config.ALIEN_SPEED, 0, 0));
-//			gamescreen.aliens.add(new Alien(50, 150, Config.ALIEN_SPEED * 2, 0,
-//					1));
-//			gamescreen.aliens.add(new Alien(100, 200, Config.ALIEN_SPEED * 3,
-//					0, 2));
-//		}
-
->>>>>>> refs/remotes/origin/master
 	}
 
 	// GameLogics
 	private void doGameLogic() {
+		//Iterator<PlayerBullet> pbIterate= playerBullets.iterator();
+		
+		List<Alien> removeAliens = new LinkedList<Alien>();
+		List<PlayerBullet> removeBullets = new LinkedList<PlayerBullet>();
+		
+		BulletCollisionsHandler handler = new BulletCollisionsHandler(this);
+		handler.update();
+		
 		// Update all GameObject Positions
 		player.moveUpdate();
+		
+//		while (pbIterate.hasNext()) {
+//			PlayerBullet bullet = pbIterate.next();
+//			bullet.moveUpdate();
+//			if (!bullet.exists()) 
+//				pbIterate.remove();
+//
+//		}
+		
+//		for (Iterator<PlayerBullet> iterator = playerBullets.iterator(); 
+//				iterator.hasNext(); iterator.next().moveUpdate());
+		
 		for (PlayerBullet pb : playerBullets) {
-			if (!pb.equals(null))
+			if (!pb.equals(null)){
 				pb.moveUpdate();
-<<<<<<< HEAD
-=======
+				if (!pb.exists()) {
+					removeBullets.add(pb);
+				}
+			}
 		}
+		for (PlayerBullet bullet : removeBullets) 
+			playerBullets.remove(bullet);
+		
+		
+		
 		for (Alien a : aliens) {
-			if (!a.equals(null))
+			if (!a.equals(null)){
 				a.moveUpdate();
+				if (!a.exists()) {
+					removeAliens.add(a);
+				}
+			}
 		}
-		for (AlienBullet ab : alienBullets) {
-			if (!ab.equals(null))
-				ab.moveUpdate();
-		}
-		if (!(alienBoss == null))
-			alienBoss.moveUpdate();
-		for (Upgrade u : upgrades) {
-			if (!u.equals(null))
-				u.moveUpdate();
->>>>>>> refs/remotes/origin/master
-		}
-		for (Alien a : aliens) {
-			if (!a.equals(null))
-				a.moveUpdate();
-		}
+		for (Alien alien : removeAliens) 
+			aliens.remove(alien);
+		
+		
 		for (AlienBullet ab : alienBullets) {
 			if (!ab.equals(null))
 				ab.moveUpdate();
@@ -295,6 +267,8 @@ public class GameScreen extends Screen {
 		}
 	}
 
+	
+	
 	public void remove(PlayerBullet object) {
 		playerBullets.remove(object);
 	}
