@@ -102,20 +102,22 @@ public class Player extends GameObject {
 	 */
 	public void keepInsideBounds() {
 		// Outside XAxis Bounds
-		if (this.getX() <= 0) {
-			this.setX(0);
+		if (this.getX() <= 0 || this.getX() >= boundX) {
+			if (this.getX() <= 0) {
+				this.setX(0);
+			} else if (this.getX() >= boundX) {
+				this.setX(boundX);
+			}
 			this.setDx(0);
-		} else if (this.getX() >= boundX) {
-			this.setX(boundX);
-			// this.setDx(this.getDx() * Config.PLAYER_FRICTION);
 		}
 		// Outside YAxis Bounds
-		if (this.getY() <= 0) {
-			this.setY(0);
+		if (this.getY() <= 0 || this.getY() >= boundY) {
+			if (this.getY() <= 0) {
+				this.setY(0);
+			} else if (this.getY() >= boundY) {
+				this.setY(boundY);
+			}
 			this.setDy(0);
-		} else if (this.getY() >= boundY) {
-			this.setY(boundY);
-			// this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 		}
 	}
 
