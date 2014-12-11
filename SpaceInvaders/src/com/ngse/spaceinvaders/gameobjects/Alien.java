@@ -1,5 +1,7 @@
 package com.ngse.spaceinvaders.gameobjects;
 
+import javazoom.jl.player.Player;
+
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.ai.AlienSystemAI.AlienPattern;
@@ -8,8 +10,6 @@ import com.ngse.spaceinvaders.screens.GameScreen;
 
 public class Alien extends GameObject {
 
-	
-		
 	enum AlienType {
 		BASIC, DUCK, SUICIDE
 	}
@@ -25,25 +25,60 @@ public class Alien extends GameObject {
 		switch (alienImageIndex) {
 		case 0:
 			setType(AlienType.BASIC);
+			break;
 		case 1:
 			setType(AlienType.DUCK);
+			break;
 		case 2:
 			setType(AlienType.SUICIDE);
+			break;
 		default:
 			setType(AlienType.BASIC);
-
+			break;
 		}
 	}
 
 	public void moveUpdate() {
-		y += dy;
-		x += dx;
 
-		// Auto remove
-		if (y + this.getImage().getHeight() >= gamescreen.getHeight() || y <= 0
-				|| x + this.getImage().getWidth() >= gamescreen.getWidth()
-				|| x <= 0) {
-			// removeFromGameScreen();
+		double px = gamescreen.player.getX();
+		double py = gamescreen.player.getY();
+		if (gamescreen.GameClock % 75 == 0)
+			shoot();
+
+		switch (this.getType()) {
+
+		case BASIC: {
+			if (x < 5
+					|| x > Config.FRAME_WIDTH - this.getImage().getWidth() - 5) {
+				dx *= -1;
+			}
+
+			x += dx;
+			y += dy;
+			break;
+		}
+
+		case DUCK: {
+			if (x < 5
+					|| x > Config.FRAME_WIDTH - this.getImage().getWidth() - 5) {
+				dx *= -1;
+			}
+			x += dx;
+			y += dy;
+			break;
+		}
+
+		case SUICIDE: {
+			y = (y + 1 * ((py - y) / 20));
+			x = (x + 1 * ((px - x) / 20));
+			break;
+		}
+
+		}
+
+		if (x > gamescreen.getWidth() || x < 0 || y > gamescreen.getHeight()
+				|| y < 0) {
+			die();
 		}
 
 	}
@@ -52,7 +87,7 @@ public class Alien extends GameObject {
 		gamescreen.alienBullets.add(new AlienBullet(this.getX()
 				+ this.getImage().getWidth() / 2, this.getY()
 				+ this.getImage().getHeight(), Config.ALIEN_BULLET_SPEED,
-				4 * Math.PI / 3));
+				3 * Math.PI / 2));
 	}
 
 	public AlienType getType() {
@@ -68,5 +103,5 @@ public class Alien extends GameObject {
 		SpaceInvadersGame.log("Alien is despawning.");
 		despawn();
 	}
-	
+
 }

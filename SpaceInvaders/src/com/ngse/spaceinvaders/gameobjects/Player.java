@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.resources.sounds.Mp3Player;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
 public class Player extends GameObject {
@@ -169,11 +170,12 @@ public class Player extends GameObject {
 	 */
 	private void shoot() {
 		playerweapon.fire();
+		// Mp3Player.play("lazer");
 	}
 
 	public void loseHealth() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

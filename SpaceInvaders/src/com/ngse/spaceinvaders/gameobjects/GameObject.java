@@ -119,15 +119,15 @@ public class GameObject {
 		g2.drawImage(this.getImage(), null, (int) this.x, (int) this.y);
 
 	}
-	
+
 	public void despawn() {
-		//GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-		//gs.remove(this);
+		GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+		gs.remove(this);
 		exists = false;
 	}
-	
+
 	public boolean exists() {
-		return exists ;
+		return exists;
 	}
 
 }
