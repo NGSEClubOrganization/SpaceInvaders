@@ -42,20 +42,29 @@ public class Alien extends GameObject {
 
 		double px = gamescreen.player.getX();
 		double py = gamescreen.player.getY();
-		if(gamescreen.GameClock % 50 == 0)
+		if (gamescreen.GameClock % 75 == 0)
 			shoot();
 
 		switch (this.getType()) {
 
 		case BASIC: {
-			y = (y + dy);
-			x = (x + dx);
+			if (x < 5
+					|| x > Config.FRAME_WIDTH - this.getImage().getWidth() - 5) {
+				dx *= -1;
+			}
+
+			x += dx;
+			y += dy;
 			break;
 		}
 
 		case DUCK: {
-			y = (y + dy);
-			x = (x + dx);
+			if (x < 5
+					|| x > Config.FRAME_WIDTH - this.getImage().getWidth() - 5) {
+				dx *= -1;
+			}
+			x += dx;
+			y += dy;
 			break;
 		}
 
@@ -78,7 +87,7 @@ public class Alien extends GameObject {
 		gamescreen.alienBullets.add(new AlienBullet(this.getX()
 				+ this.getImage().getWidth() / 2, this.getY()
 				+ this.getImage().getHeight(), Config.ALIEN_BULLET_SPEED,
-				3 * Math.PI / 2 * gamescreen.player.getX()));
+				3 * Math.PI / 2));
 	}
 
 	public AlienType getType() {

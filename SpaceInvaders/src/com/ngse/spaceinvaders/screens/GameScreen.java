@@ -116,6 +116,20 @@ public class GameScreen extends Screen {
 			if (!u.equals(null))
 				u.draw(g2);
 		}
+
+		// Print level title
+		if (GameClock >= 0 && GameClock < 500) {
+			System.out.println("Printing level 1");
+			paintString(g2, "Level 1");
+		} else if (GameClock >= 1300 && GameClock < 1500) {
+			paintString(g2, "Level 2");
+		} else if (GameClock >= 2300 && GameClock < 2500) {
+			paintString(g2, "Level 3");
+		}
+	}
+
+	private void paintString(Graphics2D g2, String string) {
+		g2.drawString(string, 100, 200);
 	}
 
 	/*
@@ -194,6 +208,7 @@ public class GameScreen extends Screen {
 		doGameLogic();
 		repaint();
 
+		// Set what level it is now
 		if (GameClock >= 500 && GameClock < 1500) {
 			Level = 1;
 		} else if (GameClock >= 1500 && GameClock < 2500) {
@@ -205,7 +220,7 @@ public class GameScreen extends Screen {
 		GameClock++;
 	}
 
-	// GameLogics
+	// GameLogic
 	private void doGameLogic() {
 		// Iterator<PlayerBullet> pbIterate= playerBullets.iterator();
 

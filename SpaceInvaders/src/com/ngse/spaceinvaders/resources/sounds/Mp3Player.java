@@ -7,21 +7,15 @@ import javazoom.jl.player.Player;
 
 public class Mp3Player {
 
-	private String filename;
-	private Player player;
+	private static String filename;
+	private static Player player;
 
 	public Mp3Player() {
+
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	public void play() {
+	public static void play(String inputfilename) {
+		filename = inputfilename;
 		try {
 			BufferedInputStream buffer = new BufferedInputStream(
 					new FileInputStream(
@@ -34,12 +28,6 @@ public class Mp3Player {
 			System.out.println(e);
 		}
 
-	}
-	
-	public static void main(String[] args) {
-		Mp3Player player = new Mp3Player();
-		player.setFilename("lazer");
-		player.play();
 	}
 
 }
