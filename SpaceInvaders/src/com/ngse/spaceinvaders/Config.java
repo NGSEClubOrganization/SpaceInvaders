@@ -17,6 +17,7 @@ public class Config {
 
 	public static final double ALIEN_SPEED = 1.00;
 	public static final double ALIEN_BULLET_SPEED = 2.00;
+	public static final int PLAYER_START_HEALTH = 5;
 
 }
 

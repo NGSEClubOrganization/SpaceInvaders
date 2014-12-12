@@ -6,13 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.Timer;
-
-import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.ai.AlienSystemAI;
 import com.ngse.spaceinvaders.gameobjects.Alien;
@@ -26,9 +22,9 @@ import com.ngse.spaceinvaders.gameobjects.Upgrade;
 import com.ngse.spaceinvaders.handlers.BulletCollisionsHandler;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 
-@SuppressWarnings("serial")
 public class GameScreen extends Screen {
 
+	private static final long serialVersionUID = 1L;
 	private GameScreen gamescreen;
 	public int GameClock;
 	public int Level;
@@ -224,6 +220,7 @@ public class GameScreen extends Screen {
 	private void doGameLogic() {
 		// Iterator<PlayerBullet> pbIterate= playerBullets.iterator();
 
+		@SuppressWarnings("unused")
 		List<Alien> removeAliens = new LinkedList<Alien>();
 		List<PlayerBullet> removeBullets = new LinkedList<PlayerBullet>();
 
@@ -276,6 +273,10 @@ public class GameScreen extends Screen {
 
 	public void remove(GameObject object) {
 		playerBullets.remove(object);
+	}
+
+	public void endGame() {
+		SpaceInvadersGame.log("Ending game...");
 	}
 
 }

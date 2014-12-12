@@ -14,6 +14,7 @@ public class Player extends GameObject {
 			BufferedImage image) {
 		super(x, y, direction, speed, image);
 		playerweapon = new PlayerWeapon(this);
+		this.health = Config.PLAYER_START_HEALTH;
 	}
 
 	public PlayerWeapon playerweapon;
@@ -29,6 +30,8 @@ public class Player extends GameObject {
 
 	private IDirection xAxis = IDirection.NON;
 	private IDirection yAxis = IDirection.NON;
+
+	private int health;
 
 	public void moveUpdate() {
 
@@ -174,8 +177,34 @@ public class Player extends GameObject {
 	}
 
 	public void loseHealth() {
-		// TODO Auto-generated method stub
+		health--;
+		if (dead()) {
+			GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
+			gs.endGame();
+		}
+	}
 
+	public void getHit() {
+		if (dy <= 0) {
+			dy = 0;
+		}
+		dy += 10;
+	}
+
+	public boolean dead() {
+		if (health <= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 }
