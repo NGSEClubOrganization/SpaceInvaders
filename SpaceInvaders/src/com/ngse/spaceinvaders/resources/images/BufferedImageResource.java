@@ -18,6 +18,7 @@ public class BufferedImageResource {
 	public static BufferedImage[] Aliens = new BufferedImage[4];
 	public static BufferedImage AlienBullet;
 	// Screens
+	public static BufferedImage GameOverScreen;
 	public static BufferedImage OptionsScreen;
 	public static BufferedImage StartScreen;
 	// Popups
@@ -39,6 +40,8 @@ public class BufferedImageResource {
 			AlienBullet = ImageIO
 					.read(new File(imagespath + "alienbullet.png"));
 			// Screens
+			GameOverScreen = ImageIO.read(new File(imagespath
+					+ "gameoverscreen.png"));
 			OptionsScreen = ImageIO.read(new File(imagespath
 					+ "optionsscreen.png"));
 			StartScreen = ImageIO
