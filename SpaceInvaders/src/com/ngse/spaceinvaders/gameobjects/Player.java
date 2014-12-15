@@ -15,14 +15,17 @@ public class Player extends GameObject {
 		super(x, y, direction, speed, image);
 		playerweapon = new PlayerWeapon(this);
 		this.health = Config.PLAYER_START_HEALTH;
+
+		this.boundX = SpaceInvadersGame.frame.getWidth()
+				- this.getImage().getWidth();
+		this.boundY = SpaceInvadersGame.frame.getHeight() - 2
+				* this.getImage().getHeight() - 0.00;
 	}
 
 	public PlayerWeapon playerweapon;
 
-	private double boundX = SpaceInvadersGame.frame.getWidth()
-			- this.getImage().getWidth();
-	private double boundY = SpaceInvadersGame.frame.getHeight() - 2
-			* this.getImage().getHeight() - 0.00;
+	private double boundX;
+	private double boundY;
 
 	private enum IDirection {
 		POS, NEG, NON

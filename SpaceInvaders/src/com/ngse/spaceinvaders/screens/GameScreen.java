@@ -25,7 +25,6 @@ import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 public class GameScreen extends Screen {
 
 	private static final long serialVersionUID = 1L;
-	private GameScreen gamescreen;
 	public int GameClock;
 	public int Level;
 
@@ -55,7 +54,6 @@ public class GameScreen extends Screen {
 	 * Constructor
 	 */
 	public GameScreen() {
-		this.gamescreen = this;
 		this.GameClock = 0;
 		// Initialize the GameState
 		this.gameState = GameState.RUNNING;
@@ -82,45 +80,49 @@ public class GameScreen extends Screen {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
-		// Reset the screen
-		g2.setColor(Color.BLACK);
-		g2.fillRect(0, 0, SpaceInvadersGame.frame.getWidth(),
-				SpaceInvadersGame.frame.getHeight());
+		if (this.gameState == GameState.RUNNING) { // if running
+			// Reset the screen
+			g2.setColor(Color.BLACK);
+			g2.fillRect(0, 0, SpaceInvadersGame.frame.getWidth(),
+					SpaceInvadersGame.frame.getHeight());
 
-		// TODO: doGameLogic();
-		// this.doGameLogic();
+			/*
+			 * Draw the gameobjects
+			 */
+			player.draw(g2);
+			for (PlayerBullet pb : playerBullets) {
+				if (!pb.equals(null))
+					pb.draw(g2);
+			}
+			for (Alien a : aliens) {
+				if (!a.equals(null))
+					a.draw(g2);
+			}
+			for (AlienBullet ab : alienBullets) {
+				if (!ab.equals(null))
+					ab.draw(g2);
+			}
+			if (!(alienBoss == null))
+				alienBoss.draw(g2);
+			for (Upgrade u : upgrades) {
+				if (!u.equals(null))
+					u.draw(g2);
+			}
 
-		/*
-		 * Draw the gameobjects
-		 */
-		player.draw(g2);
-		for (PlayerBullet pb : playerBullets) {
-			if (!pb.equals(null))
-				pb.draw(g2);
-		}
-		for (Alien a : aliens) {
-			if (!a.equals(null))
-				a.draw(g2);
-		}
-		for (AlienBullet ab : alienBullets) {
-			if (!ab.equals(null))
-				ab.draw(g2);
-		}
-		if (!(alienBoss == null))
-			alienBoss.draw(g2);
-		for (Upgrade u : upgrades) {
-			if (!u.equals(null))
-				u.draw(g2);
-		}
-
-		// Print level title
-		if (GameClock >= 0 && GameClock < 500) {
-			System.out.println("Printing level 1");
-			paintString(g2, "Level 1");
-		} else if (GameClock >= 1300 && GameClock < 1500) {
-			paintString(g2, "Level 2");
-		} else if (GameClock >= 2300 && GameClock < 2500) {
-			paintString(g2, "Level 3");
+			// Print level title
+			if (GameClock >= 0 && GameClock < 500) {
+				System.out.println("Printing level 1");
+				paintString(g2, "Level 1");
+			} else if (GameClock >= 1300 && GameClock < 1500) {
+				paintString(g2, "Level 2");
+			} else if (GameClock >= 2300 && GameClock < 2500) {
+				paintString(g2, "Level 3");
+			}
+		} else { // if paused
+			BufferedImage pausepopup = BufferedImageResource.PausePopup;
+			g2.drawImage(pausepopup, null,
+					(int) this.getWidth() - pausepopup.getWidth() * 2,
+					(int) this.getHeight() - pausepopup.getHeight() * 2);
 		}
 	}
 
@@ -148,15 +150,13 @@ public class GameScreen extends Screen {
 		case KeyEvent.VK_ESCAPE:
 			if (gameState.equals(GameState.RUNNING)) {
 				pauseGame();
-				gameState = GameState.PAUSE;
 			} else if (gameState.equals(GameState.PAUSE)) {
 				SpaceInvadersGame.setScreen(new StartScreen());
 			}
 			break;
 		case KeyEvent.VK_ENTER:
 			if (gameState.equals(GameState.PAUSE)) {
-				gameState = GameState.RUNNING;
-				SpaceInvadersGame.setScreen(gamescreen);
+				resumeGame();
 			}
 			break;
 		}
@@ -183,14 +183,14 @@ public class GameScreen extends Screen {
 	 * Pause popup
 	 */
 	public void pauseGame() {
-		SpaceInvadersGame.timer.stop();
-		Graphics2D g2 = (Graphics2D) SpaceInvadersGame.frame.getContentPane()
-				.getGraphics();
-		BufferedImage pausepopup = BufferedImageResource.PausePopup;
-		g2.drawImage(pausepopup, null, (int) SpaceInvadersGame.frame
-				.getContentPane().getWidth() - pausepopup.getWidth() * 2,
-				(int) SpaceInvadersGame.frame.getContentPane().getHeight()
-						- pausepopup.getHeight() * 2);
+		this.gameState = GameState.PAUSE;
+	}
+
+	/*
+	 * Resume Game
+	 */
+	public void resumeGame() {
+		this.gameState = GameState.RUNNING;
 	}
 
 	/*
@@ -200,20 +200,24 @@ public class GameScreen extends Screen {
 	// Constant Timer Updates
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO: doGameLogic();
-		doGameLogic();
-		repaint();
+		if (this.gameState == GameState.RUNNING) {
+			// TODO: doGameLogic();
+			doGameLogic();
 
-		// Set what level it is now
-		if (GameClock >= 500 && GameClock < 1500) {
-			Level = 1;
-		} else if (GameClock >= 1500 && GameClock < 2500) {
-			Level = 2;
-		} else if (GameClock >= 2500 && GameClock < 3500) {
-			Level = 3;
+			// Set what level it is now
+			if (GameClock >= 500 && GameClock < 1500) {
+				Level = 1;
+			} else if (GameClock >= 1500 && GameClock < 2500) {
+				Level = 2;
+			} else if (GameClock >= 2500 && GameClock < 3500) {
+				Level = 3;
+			}
+
+			GameClock++;
+		} else if (this.gameState == GameState.PAUSE) {
+
 		}
-
-		GameClock++;
+		repaint();
 	}
 
 	// GameLogic

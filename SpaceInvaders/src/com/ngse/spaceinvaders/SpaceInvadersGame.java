@@ -8,6 +8,8 @@ import javax.swing.Timer;
 
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 import com.ngse.spaceinvaders.resources.sounds.AudioStreamResource;
+import com.ngse.spaceinvaders.screens.GameScreen;
+import com.ngse.spaceinvaders.screens.OptionsScreen;
 import com.ngse.spaceinvaders.screens.Screen;
 import com.ngse.spaceinvaders.screens.StartScreen;
 
@@ -16,12 +18,13 @@ public class SpaceInvadersGame {
 	public static JFrame frame;
 	public static Timer timer = new Timer(10, null);
 
+	public static GameScreen gameScreen;
+	public static OptionsScreen optionScreen;
+	public static StartScreen startScreen;
+
 	public static void main(String[] args) {
 		// initFrame
 		frame = new JFrame();
-
-		// Start Screen of game
-		setScreen(new StartScreen());
 
 		// initHandlers
 
@@ -32,6 +35,13 @@ public class SpaceInvadersGame {
 		frame.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
+
+		gameScreen = new GameScreen();
+		optionScreen = new OptionsScreen();
+		startScreen = new StartScreen();
+
+		// Start Screen of game
+		setScreen(startScreen);
 
 		timer.start();
 		frame.setVisible(true);
