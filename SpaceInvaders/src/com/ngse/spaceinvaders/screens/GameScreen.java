@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.ai.AlienSystemAI;
 import com.ngse.spaceinvaders.gameobjects.Alien;
@@ -42,7 +43,9 @@ public class GameScreen extends Screen {
 
 	// AlienSystemAI for this game
 	public AlienSystemAI ASAI;
-
+	
+	public int life;
+	
 	// GameState
 	private enum GameState {
 		RUNNING, PAUSE
@@ -72,6 +75,10 @@ public class GameScreen extends Screen {
 
 		// Initialize AI's
 		this.ASAI = new AlienSystemAI(this);
+		
+		//Player's life
+		life = Config.PLAYER_START_HEALTH;
+		
 	}
 
 	/*
