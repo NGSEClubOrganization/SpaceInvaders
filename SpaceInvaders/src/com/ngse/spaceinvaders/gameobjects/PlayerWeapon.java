@@ -144,4 +144,9 @@ public class PlayerWeapon {
 
 		return bullets;
 	}
+
+	public int getCurrentWeaponCooldown() {
+		// TODO change so that each weapon returns a different cooldown time (if we want to)
+		return 5;
+	}
 }
