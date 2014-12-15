@@ -30,9 +30,17 @@ public class Player extends GameObject {
 	private enum IDirection {
 		POS, NEG, NON
 	}
-
-	private IDirection xAxis = IDirection.NON;
-	private IDirection yAxis = IDirection.NON;
+	
+	private int weaponCooldown = 0;
+	private boolean shooting = false;
+	
+	private boolean up = false;
+	private boolean down = false;
+	private boolean left = false;
+	private boolean right = false;
+	
+	//private IDirection xAxis = IDirection.NON;
+	//private IDirection yAxis = IDirection.NON;
 
 	private int health;
 
@@ -47,6 +55,9 @@ public class Player extends GameObject {
 		} else {
 			keepInsideBounds();
 		}
+		
+		if (shooting)
+			shoot();
 
 	}
 
@@ -56,22 +67,32 @@ public class Player extends GameObject {
 	public void keyPressedEventUpdate(int keycode) {
 		switch (keycode) {
 		case KeyEvent.VK_W:
-			this.yAxis = IDirection.POS;
+			up = true;
+			//this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_S:
-			this.yAxis = IDirection.NEG;
+			down = true;
+			//this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_A:
-			this.xAxis = IDirection.NEG;
+			left = true;
+			//this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_D:
-			this.xAxis = IDirection.POS;
+			right = true;
+			//this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_SPACE:
-			SpaceInvadersGame.log("Space bar pressed ; shooting bullet");
-			shoot();
+			if (!shooting) {
+				startShoot();
+			}
 			break;
 		}
+	}
+
+	private void startShoot() {
+		shooting = true;
+		weaponCooldown = 20;
 	}
 
 	/*
@@ -80,19 +101,27 @@ public class Player extends GameObject {
 	public void keyReleaseEventUpdate(int keycode) {
 		switch (keycode) {
 		case KeyEvent.VK_W:
-			this.yAxis = IDirection.NON;
+			up = false;
+			//this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_S:
-			this.yAxis = IDirection.NON;
+			down = false;
+			//this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_A:
-			this.xAxis = IDirection.NON;
+			left = false;
+			//this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_D:
-			this.xAxis = IDirection.NON;
+			right = false;
+			//this.xAxis = IDirection.NON;
+			break;
+		case KeyEvent.VK_SPACE:
+			shooting = false;
 			break;
 		}
 	}
+
 
 	/*
 	 * Checks if Player is inside bounds
@@ -134,34 +163,38 @@ public class Player extends GameObject {
 	public void move() {
 		// XAXIS direction account
 		if (this.getDx() <= Config.PLAYER_MAX_SPEED) {
-			if (xAxis.equals(IDirection.POS)) {
+			//if (xAxis.equals(IDirection.POS)) {
+			if (right) {
 				// Right
 				// SpaceInvadersGame.log("Got direction: Right; Going Right");
 				this.setDx((this.getDx() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} else if (xAxis.equals(IDirection.NEG)) {
+			} //else if (xAxis.equals(IDirection.NEG)) {
+			else if (left) {
 				// Left
 				// SpaceInvadersGame.log("Got direction: Left; Going left");
 				this.setDx((this.getDx() - Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} else if (xAxis.equals(IDirection.NON)) {
+			} else {
 				// Drag
 				this.setDx(this.getDx() * Config.PLAYER_FRICTION);
 			}
 		}
 		// YAXIS direction account
 		if (this.getDy() <= Config.PLAYER_MAX_SPEED) {
-			if (yAxis.equals(IDirection.NEG)) {
+			//if (yAxis.equals(IDirection.NEG)) {
+			if (down) {
 				// Down
 				// SpaceInvadersGame.log("Got direction: Down; Going Down");
 				this.setDy((this.getDy() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} else if (yAxis.equals(IDirection.POS)) {
+			} //else if (yAxis.equals(IDirection.POS)) {
+			else if (up)
 				// Up
 				// SpaceInvadersGame.log("Got direction: Up; Going Up");
 				this.setDy((this.getDy() - Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} else if (yAxis.equals(IDirection.NON)) {
+			} else {
 				// Drag
 				this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 			}
@@ -175,8 +208,13 @@ public class Player extends GameObject {
 	 * Shooter Method
 	 */
 	private void shoot() {
-		playerweapon.fire();
-		// Mp3Player.play("lazer");
+		if (weaponCooldown < playerweapon.getCurrentWeaponCooldown())
+			weaponCooldown++;
+		else {
+			weaponCooldown = 0;
+			playerweapon.fire();
+			// Mp3Player.play("lazer");
+		}
 	}
 
 	public void loseHealth() {
