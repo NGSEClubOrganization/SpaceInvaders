@@ -1,5 +1,7 @@
 package com.ngse.spaceinvaders.gameobjects;
 
+import java.util.Random;
+
 import javazoom.jl.player.Player;
 
 import com.ngse.spaceinvaders.Config;
@@ -9,7 +11,9 @@ import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
 public class Alien extends GameObject {
-
+	
+	Random rand = new Random();
+	
 	enum AlienType {
 		BASIC, DUCK, SUICIDE
 	}
@@ -102,6 +106,24 @@ public class Alien extends GameObject {
 		// TODO Auto-generated method stub
 		SpaceInvadersGame.log("Alien is despawning.");
 		despawn();
+		if(rand.nextInt(Config.UPGRADE_CHANCE) == 0){
+			SpaceInvadersGame.gameScreen.upgrades.add(new Upgrade(
+					rand.nextInt(Config.FRAME_WIDTH), rand.nextInt(Config.FRAME_HEIGHT),
+					((rand.nextInt(2)+1)*2)-3, 1,
+					Config.UPGRADEBOX_SPEED,
+					image));
+			SpaceInvadersGame.log("UP-Box has spawned.");
+		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+

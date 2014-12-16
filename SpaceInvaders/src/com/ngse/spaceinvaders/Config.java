@@ -1,8 +1,10 @@
 
 package com.ngse.spaceinvaders;
 
+
 public class Config {
 
+	
 	public static final int FRAME_WIDTH = 600;
 	public static final int FRAME_HEIGHT = 600;
 
@@ -18,6 +20,9 @@ public class Config {
 	public static final double ALIEN_SPEED = 1.00;
 	public static final double ALIEN_BULLET_SPEED = 2.00;
 	public static final int PLAYER_START_HEALTH = 5;
-
+	public static final int UPGRADEBOX_SPEED = 5;
+	
+	public static final int UPGRADE_CHANCE = 9;
+	
 }
 
