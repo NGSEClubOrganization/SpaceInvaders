@@ -198,7 +198,6 @@ public class Player extends GameObject {
 				// Drag
 				this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 			}
-		}
 		// Move
 		this.setX(this.getX() + this.getDx());
 		this.setY(this.getY() + this.getDy());

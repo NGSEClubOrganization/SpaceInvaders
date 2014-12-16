@@ -28,6 +28,7 @@ public class GameScreen extends Screen {
 	private static final long serialVersionUID = 1L;
 	public int GameClock;
 	public int Level;
+	private int score = 0;
 
 	// GameObjects:
 	public Player player;
@@ -86,7 +87,7 @@ public class GameScreen extends Screen {
 	 */
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
+		
 		if (this.gameState == GameState.RUNNING) { // if running
 			// Reset the screen
 			g2.setColor(Color.BLACK);
@@ -125,12 +126,61 @@ public class GameScreen extends Screen {
 			} else if (GameClock >= 2300 && GameClock < 2500) {
 				paintString(g2, "Level 3");
 			}
+			this.drawPlayerUI(g2);
 		} else { // if paused
 			BufferedImage pausepopup = BufferedImageResource.PausePopup;
 			g2.drawImage(pausepopup, null,
 					(int) this.getWidth() - pausepopup.getWidth() * 2,
 					(int) this.getHeight() - pausepopup.getHeight() * 2);
 		}
+	}
+
+	private void drawPlayerUI(Graphics2D g2) { //XXX check if string placement works
+		g2.drawString("Score: " + String.valueOf(score), 50, 50);
+		g2.drawString("Level: " + String.valueOf(Level), 50, 100);
+		g2.drawString("Weapon: " + player.playerweapon.getWeaponName(), 50, 150);
+		
+		
+		int width = 50;
+		int height = 50;
+		
+		if (BufferedImageResource.FullHealth != null) {
+			height = BufferedImageResource.FullHealth.getHeight();
+			width = BufferedImageResource.FullHealth.getWidth();
+		}
+		
+		for (int i = 1; i <= Config.PLAYER_START_HEALTH; i++)
+			if (i <= player.getHealth()) {
+				if (BufferedImageResource.FullHealth != null) {
+					g2.drawImage(BufferedImageResource.FullHealth
+							, SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+							, 50
+							, null);
+				}
+				else {
+					g2.setColor(Color.RED);
+					g2.drawOval(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+							, 50
+							, width
+							, height);
+				}
+			}
+			else {
+				if (BufferedImageResource.LostHealth != null) {
+					g2.drawImage(BufferedImageResource.LostHealth
+							, SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+							, 50
+							, null);
+				}
+				else {
+					g2.setColor(Color.GRAY);
+					g2.drawOval(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+							, 50
+							, width
+							, height);
+				}
+			}
+		
 	}
 
 	private void paintString(Graphics2D g2, String string) {
@@ -208,7 +258,6 @@ public class GameScreen extends Screen {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (this.gameState == GameState.RUNNING) {
-			// TODO: doGameLogic();
 			doGameLogic();
 
 			// Set what level it is now
@@ -288,6 +337,11 @@ public class GameScreen extends Screen {
 
 	public void endGame() {
 		SpaceInvadersGame.log("Ending game...");
+	}
+	
+	public void addScore(int addition) {
+		score += addition;
+		
 	}
 
 }
