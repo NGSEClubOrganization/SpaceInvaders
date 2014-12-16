@@ -153,7 +153,7 @@ public class GameScreen extends Screen {
 				}
 				else {
 					g2.setColor(Color.RED);
-					g2.drawRect(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+					g2.drawOval(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
 							, 50
 							, width
 							, height);
@@ -168,7 +168,7 @@ public class GameScreen extends Screen {
 				}
 				else {
 					g2.setColor(Color.GRAY);
-					g2.drawRect(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
+					g2.drawOval(SpaceInvadersGame.frame.getWidth() - 50 - width * Config.PLAYER_START_HEALTH + width * i
 							, 50
 							, width
 							, height);
