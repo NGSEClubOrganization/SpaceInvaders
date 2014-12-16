@@ -149,4 +149,17 @@ public class PlayerWeapon {
 		// TODO change so that each weapon returns a different cooldown time (if we want to)
 		return 5;
 	}
+
+	public String getWeaponName() {
+		switch (type) {
+		case BASIC: 
+			return "Basic";
+		case THREE_WAY:
+			return "Three Way";
+		case ULTIMATE:
+			return "Ultimate";
+		default:
+			return "Error. Illegal weapon type";
+		}
+	}
 }

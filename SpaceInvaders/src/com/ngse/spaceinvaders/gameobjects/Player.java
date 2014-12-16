@@ -198,7 +198,6 @@ public class Player extends GameObject {
 				// Drag
 				this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 			}
-		}
 		// Move
 		this.setX(this.getX() + this.getDx());
 		this.setY(this.getY() + this.getDy());
@@ -219,10 +218,6 @@ public class Player extends GameObject {
 
 	public void loseHealth() {
 		health--;
-		if (dead()) {
-			GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-			gs.endGame();
-		}
 	}
 
 	public void getHit() {
