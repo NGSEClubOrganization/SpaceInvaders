@@ -23,6 +23,7 @@ import com.ngse.spaceinvaders.gameobjects.PlayerBullet;
 import com.ngse.spaceinvaders.gameobjects.Upgrade;
 import com.ngse.spaceinvaders.handlers.BulletCollisionsHandler;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
+import com.ngse.spaceinvaders.resources.sounds.Mp3Player;
 
 public class GameScreen extends Screen {
 
@@ -120,7 +121,7 @@ public class GameScreen extends Screen {
 
 			// Print level title
 			if (GameClock >= 0 && GameClock < 500) {
-				System.out.println("Printing level 1");
+				// System.out.println("Printing level 1");
 				paintString(g2, "Level 1");
 			} else if (GameClock >= 1300 && GameClock < 1500) {
 				paintString(g2, "Level 2");

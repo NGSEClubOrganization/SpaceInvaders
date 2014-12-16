@@ -2,6 +2,7 @@ package com.ngse.spaceinvaders.gameobjects;
 
 import com.ngse.spaceinvaders.Config;
 import com.ngse.spaceinvaders.SpaceInvadersGame;
+import com.ngse.spaceinvaders.resources.sounds.Mp3Player;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
 //this class is intended to be included in the Player class
@@ -87,6 +88,7 @@ public class PlayerWeapon {
 			GameScreen gamescreen = (GameScreen) SpaceInvadersGame
 					.getCurrentScreen();
 			for (int i = 0; i <= bullets.length - 1; i++) {
+				Mp3Player.play("playerlazer");
 				gamescreen.playerBullets.add(bullets[i]);
 			}
 		}
@@ -146,13 +148,14 @@ public class PlayerWeapon {
 	}
 
 	public int getCurrentWeaponCooldown() {
-		// TODO change so that each weapon returns a different cooldown time (if we want to)
-		return 5;
+		// TODO change so that each weapon returns a different cooldown time (if
+		// we want to)
+		return 25;
 	}
 
 	public String getWeaponName() {
 		switch (type) {
-		case BASIC: 
+		case BASIC:
 			return "Basic";
 		case THREE_WAY:
 			return "Three Way";

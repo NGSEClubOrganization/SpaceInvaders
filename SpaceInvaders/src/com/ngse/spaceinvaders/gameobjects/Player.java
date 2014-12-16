@@ -92,7 +92,7 @@ public class Player extends GameObject {
 
 	private void startShoot() {
 		shooting = true;
-		weaponCooldown = 20;
+		weaponCooldown = 100;
 	}
 
 	/*

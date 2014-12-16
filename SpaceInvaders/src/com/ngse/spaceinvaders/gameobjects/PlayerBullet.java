@@ -2,6 +2,7 @@ package com.ngse.spaceinvaders.gameobjects;
 
 import com.ngse.spaceinvaders.SpaceInvadersGame;
 import com.ngse.spaceinvaders.resources.images.BufferedImageResource;
+import com.ngse.spaceinvaders.resources.sounds.Mp3Player;
 import com.ngse.spaceinvaders.screens.GameScreen;
 
 public class PlayerBullet extends Bullet {
@@ -14,11 +15,14 @@ public class PlayerBullet extends Bullet {
 		if (SpaceInvadersGame.getCurrentScreen() instanceof GameScreen) {
 			gameScreen = (GameScreen) SpaceInvadersGame.getCurrentScreen();
 		} else {
-			SpaceInvadersGame.log("Trying to add a bullet outside of GameScreen");
+			SpaceInvadersGame
+					.log("Trying to add a bullet outside of GameScreen");
 		}
 	}
 
 	public void addToGameScreen() {
+		Mp3Player.play("lazer");
+		System.out.println("Playing laser");
 		gameScreen.playerBullets.add(this);
 	}
 

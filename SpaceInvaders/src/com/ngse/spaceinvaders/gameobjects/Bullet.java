@@ -165,7 +165,7 @@ public class Bullet extends GameObject {
 	
 	public void despawn() {
 		//GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-		SpaceInvadersGame.log("bullet despawning.");
+		// SpaceInvadersGame.log("bullet despawning.");
 		//gs.remove(this);
 		exists = false;
 	}

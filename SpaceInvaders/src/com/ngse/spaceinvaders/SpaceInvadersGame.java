@@ -51,7 +51,7 @@ public class SpaceInvadersGame {
 		setScreen(startScreen);
 
 		// initThreadPool
-		threadPool = Executors.newFixedThreadPool(100);
+		threadPool = Executors.newFixedThreadPool(200);
 
 		timer.start();
 		frame.setVisible(true);
@@ -77,7 +77,7 @@ public class SpaceInvadersGame {
 		}
 		// Stop timer
 		if (timer.isRunning()) {
-			log("timer isRunning, so stopping in order to reset");
+			// log("timer isRunning, so stopping in order to reset");
 			timer.stop();
 		}
 		frame.getContentPane().removeAll();
@@ -88,18 +88,18 @@ public class SpaceInvadersGame {
 
 		// Set the screen
 		frame.getContentPane().add(screen);
-		log("Added screen: " + screen.toString());
+		// log("Added screen: " + screen.toString());
 		frame.addKeyListener(screen);
-		log("Added keylistener: " + screen.toString());
+		// log("Added keylistener: " + screen.toString());
 		// Add screen as ActionListener
 		timer.addActionListener(screen);
-		log("Added " + screen.toString() + " as an actionlistener");
+		// log("Added " + screen.toString() + " as an actionlistener");
 		timer.start();
-		log("Started timer, timer isRunning: " + timer.isRunning());
+		// log("Started timer, timer isRunning: " + timer.isRunning());
 
 		// Revalidating
 		frame.getContentPane().revalidate();
-		log("Revalidated!");
+		// log("Revalidated!");
 	}
 
 	/*

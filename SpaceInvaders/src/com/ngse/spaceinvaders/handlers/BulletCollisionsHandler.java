@@ -37,7 +37,7 @@ public class BulletCollisionsHandler {
 				screen.player.getHit();
 				screen.player.loseHealth();
 				removeBullets.add(bullet);
-				log("An alien bullet hit player."); // XXX debug script, remove
+				// log("An alien bullet hit player."); // XXX debug script, remove
 													// later
 			}
 		}
@@ -59,7 +59,7 @@ public class BulletCollisionsHandler {
 					removeBullets.add(bullet);
 					// alien.die();
 					// bullet.despawn();
-					log("Player Bullet hit an alien."); // XXX debug script,
+					// log("Player Bullet hit an alien."); // XXX debug script,
 														// remove later
 				}
 			}
@@ -69,7 +69,7 @@ public class BulletCollisionsHandler {
 				screen.alienBoss.die(); // TODO implement a die() method in
 										// AlienBoss
 				removeBullets.add(bullet);
-				log("A player bullet hit a boss"); // XXX debug output, remove
+				// log("A player bullet hit a boss"); // XXX debug output, remove
 													// later
 				screen.alienBoss.die();
 			}
