@@ -91,7 +91,6 @@ public class GameScreen extends Screen {
 			/*
 			 * Draw the gameobjects
 			 */
-			this.drawPlayerUI(g2);
 			player.draw(g2);
 			for (PlayerBullet pb : playerBullets) {
 				if (!pb.equals(null))
@@ -121,6 +120,7 @@ public class GameScreen extends Screen {
 			} else if (GameClock >= 2300 && GameClock < 2500) {
 				paintString(g2, "Level 3");
 			}
+			this.drawPlayerUI(g2);
 		} else { // if paused
 			BufferedImage pausepopup = BufferedImageResource.PausePopup;
 			g2.drawImage(pausepopup, null,
