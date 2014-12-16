@@ -23,6 +23,9 @@ public class BufferedImageResource {
 	public static BufferedImage StartScreen;
 	// Popups
 	public static BufferedImage PausePopup;
+	// Images for health points
+	public static BufferedImage FullHealth;
+	public static BufferedImage LostHealth;
 
 	public static void initImages() {
 		String imagespath = "src//com//ngse//spaceinvaders//resources//images//";
