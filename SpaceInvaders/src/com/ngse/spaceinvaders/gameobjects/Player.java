@@ -219,10 +219,6 @@ public class Player extends GameObject {
 
 	public void loseHealth() {
 		health--;
-		if (dead()) {
-			GameScreen gs = (GameScreen) SpaceInvadersGame.getCurrentScreen();
-			gs.endGame();
-		}
 	}
 
 	public void getHit() {

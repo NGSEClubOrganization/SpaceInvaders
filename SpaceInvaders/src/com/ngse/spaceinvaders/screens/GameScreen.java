@@ -43,9 +43,9 @@ public class GameScreen extends Screen {
 
 	// AlienSystemAI for this game
 	public AlienSystemAI ASAI;
-	
+
 	public int life;
-	
+
 	// GameState
 	private enum GameState {
 		RUNNING, PAUSE
@@ -75,10 +75,10 @@ public class GameScreen extends Screen {
 
 		// Initialize AI's
 		this.ASAI = new AlienSystemAI(this);
-		
-		//Player's life
+
+		// Player's life
 		life = Config.PLAYER_START_HEALTH;
-		
+
 	}
 
 	/*
@@ -264,6 +264,18 @@ public class GameScreen extends Screen {
 		}
 
 		ASAI.update();
+
+		// Check if the game is over (life is 0)
+		if (this.life <= 0) {
+			gameOver();
+		}
+	}
+	
+	/*
+	 * Remove objects methods
+	 */
+	private void gameOver() {
+		SpaceInvadersGame.setScreen(SpaceInvadersGame.gameOverScreen);
 	}
 
 	public void remove(PlayerBullet object) {
