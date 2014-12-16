@@ -7,20 +7,20 @@ public class Storyboard {
 	Random rnd = new Random();
 
 	// Level 1 (t 500 - 1500)
-	public static final double[] Level1Times = { 550, 550, 600, 600, 650, 650,
-			700, 700, 750, 750, 800, 800, 850, 850, 900, 900, 950, 950, 1000,
-			1000, 1200, 1200, 1200, 1200 };
-	public static final double[] Level1Xs = { 0, 600, 0, 600, 0, 600, 0, 600,
-			0, 600, 0, 600, 0, 600, 0, 600, 0, 600, 0, 600, 0, 0, 600, 600 };
-	public static final double[] Level1Ys = { 100, 100, 100, 100, 100, 100,
-			100, 100, 100, 100, 200, 200, 200, 200, 200, 200, 200, 200, 200,
-			200, 0, 600, 0, 600 };
+	public static final double[] Level1Times = { 551, 551, 611, 611, 651, 651,
+			711, 711, 751, 751, 811, 811, 851, 851, 911, 911, 951, 951, 1111,
+			1111, 1211, 1211, 1211, 1211 };
+	public static final double[] Level1Xs = { 1, 611, 1, 611, 1, 611, 1, 611,
+			1, 611, 1, 611, 1, 611, 1, 611, 1, 611, 1, 611, 1, 1, 611, 611 };
+	public static final double[] Level1Ys = { 111, 111, 111, 111, 111, 111,
+			111, 111, 111, 111, 211, 211, 211, 211, 211, 211, 211, 211, 211,
+			211, 1, 611, 1, 611 };
 	public static final double[] Level1DXs = { 2, -2, 2, -2, 2, -2, 2, -2, 2,
 			-2, 3, -3, 3, -3, 3, -3, 3, -3, 3, -3, 2, 2, 2, 2 };
-	public static final double[] Level1DYs = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 };
-	public static final int[] Level1Types = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 };
+	public static final double[] Level1DYs = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 };
+	public static final int[] Level1Types = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 };
 
 	// Level 2 (t 1500 - 2500)
 	public static final double[] Level2Times = { 1600, 1600, 1650, 1650, 1700,

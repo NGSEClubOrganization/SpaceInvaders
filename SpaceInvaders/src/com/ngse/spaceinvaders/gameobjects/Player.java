@@ -30,17 +30,17 @@ public class Player extends GameObject {
 	private enum IDirection {
 		POS, NEG, NON
 	}
-	
+
 	private int weaponCooldown = 0;
 	private boolean shooting = false;
-	
+
 	private boolean up = false;
 	private boolean down = false;
 	private boolean left = false;
 	private boolean right = false;
-	
-	//private IDirection xAxis = IDirection.NON;
-	//private IDirection yAxis = IDirection.NON;
+
+	// private IDirection xAxis = IDirection.NON;
+	// private IDirection yAxis = IDirection.NON;
 
 	private int health;
 
@@ -55,7 +55,7 @@ public class Player extends GameObject {
 		} else {
 			keepInsideBounds();
 		}
-		
+
 		if (shooting)
 			shoot();
 
@@ -68,19 +68,19 @@ public class Player extends GameObject {
 		switch (keycode) {
 		case KeyEvent.VK_W:
 			up = true;
-			//this.yAxis = IDirection.NON;
+			// this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_S:
 			down = true;
-			//this.yAxis = IDirection.NON;
+			// this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_A:
 			left = true;
-			//this.xAxis = IDirection.NON;
+			// this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_D:
 			right = true;
-			//this.xAxis = IDirection.NON;
+			// this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_SPACE:
 			if (!shooting) {
@@ -102,26 +102,30 @@ public class Player extends GameObject {
 		switch (keycode) {
 		case KeyEvent.VK_W:
 			up = false;
-			//this.yAxis = IDirection.NON;
+			// this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_S:
 			down = false;
-			//this.yAxis = IDirection.NON;
+			// this.yAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_A:
 			left = false;
-			//this.xAxis = IDirection.NON;
+			// this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_D:
 			right = false;
-			//this.xAxis = IDirection.NON;
+			// this.xAxis = IDirection.NON;
 			break;
 		case KeyEvent.VK_SPACE:
 			shooting = false;
 			break;
+		default:
+			up = false;
+			down = false;
+			left = false;
+			right = false;
 		}
 	}
-
 
 	/*
 	 * Checks if Player is inside bounds
@@ -163,13 +167,13 @@ public class Player extends GameObject {
 	public void move() {
 		// XAXIS direction account
 		if (this.getDx() <= Config.PLAYER_MAX_SPEED) {
-			//if (xAxis.equals(IDirection.POS)) {
+			// if (xAxis.equals(IDirection.POS)) {
 			if (right) {
 				// Right
 				// SpaceInvadersGame.log("Got direction: Right; Going Right");
 				this.setDx((this.getDx() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} //else if (xAxis.equals(IDirection.NEG)) {
+			} // else if (xAxis.equals(IDirection.NEG)) {
 			else if (left) {
 				// Left
 				// SpaceInvadersGame.log("Got direction: Left; Going left");
@@ -182,22 +186,26 @@ public class Player extends GameObject {
 		}
 		// YAXIS direction account
 		if (this.getDy() <= Config.PLAYER_MAX_SPEED) {
-			//if (yAxis.equals(IDirection.NEG)) {
+			// if (yAxis.equals(IDirection.NEG)) {
 			if (down) {
 				// Down
 				// SpaceInvadersGame.log("Got direction: Down; Going Down");
 				this.setDy((this.getDy() + Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} //else if (yAxis.equals(IDirection.POS)) {
+			} // else if (yAxis.equals(IDirection.POS)) {
 			else if (up)
 				// Up
 				// SpaceInvadersGame.log("Got direction: Up; Going Up");
 				this.setDy((this.getDy() - Config.PLAYER_SPEED)
 						* Config.PLAYER_FRICTION);
-			} else {
+			else {
 				// Drag
 				this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 			}
+		} else {
+			// Drag
+			this.setDy(this.getDy() * Config.PLAYER_FRICTION);
+		}
 		// Move
 		this.setX(this.getX() + this.getDx());
 		this.setY(this.getY() + this.getDy());

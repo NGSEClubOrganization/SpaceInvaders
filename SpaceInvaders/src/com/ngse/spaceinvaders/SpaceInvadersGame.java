@@ -2,6 +2,8 @@ package com.ngse.spaceinvaders;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -24,6 +26,8 @@ public class SpaceInvadersGame {
 	public static StartScreen startScreen;
 	public static GameOverScreen gameOverScreen;
 
+	public static ExecutorService threadPool;
+
 	public static void main(String[] args) {
 		// initFrame
 		frame = new JFrame();
@@ -45,6 +49,9 @@ public class SpaceInvadersGame {
 
 		// Start Screen of game
 		setScreen(startScreen);
+
+		// initThreadPool
+		threadPool = Executors.newFixedThreadPool(100);
 
 		timer.start();
 		frame.setVisible(true);
