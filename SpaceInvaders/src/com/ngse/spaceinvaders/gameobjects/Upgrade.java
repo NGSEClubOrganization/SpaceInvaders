@@ -1,6 +1,5 @@
 package com.ngse.spaceinvaders.gameobjects;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -10,6 +9,8 @@ import com.ngse.spaceinvaders.SpaceInvadersGame;
 
 public class Upgrade extends GameObject {
 	
+	
+	//hi
 	private double speed;
 	private double l; //l = length
 	private Random rand = new Random();
