@@ -111,7 +111,7 @@ public class Alien extends GameObject {
 					rand.nextInt(Config.FRAME_WIDTH), rand.nextInt(Config.FRAME_HEIGHT),
 					((rand.nextInt(2)+1)*2)-3, 1,
 					Config.UPGRADEBOX_SPEED,
-					image));
+					BufferedImageResource.powerupBox));
 			SpaceInvadersGame.log("UP-Box has spawned.");
 		}
 	}

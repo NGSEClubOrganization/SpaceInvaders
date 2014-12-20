@@ -108,6 +108,12 @@ public class GameScreen extends Screen {
 				if (!a.equals(null))
 					a.draw(g2);
 			}
+			
+			for (Upgrade up : upgrades) {
+				if (!up.equals(null))
+					up.draw(g2);
+			}
+			
 			for (AlienBullet ab : alienBullets) {
 				if (!ab.equals(null))
 					ab.draw(g2);

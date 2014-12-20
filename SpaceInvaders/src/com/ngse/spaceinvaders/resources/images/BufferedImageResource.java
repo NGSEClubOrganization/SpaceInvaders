@@ -26,7 +26,10 @@ public class BufferedImageResource {
 	// Images for health points
 	public static BufferedImage FullHealth;
 	public static BufferedImage LostHealth;
-
+	//powerup box
+	public static BufferedImage powerupBox;
+	
+	
 	public static void initImages() {
 		String imagespath = "src//com//ngse//spaceinvaders//resources//images//";
 
@@ -42,6 +45,9 @@ public class BufferedImageResource {
 			Aliens[3] = ImageIO.read(new File(imagespath + "alien4.png"));
 			AlienBullet = ImageIO
 					.read(new File(imagespath + "alienbullet.png"));
+			
+			powerupBox = ImageIO
+					.read(new File(imagespath + "power.png"));
 			// Screens
 			GameOverScreen = ImageIO.read(new File(imagespath
 					+ "gameoverscreen.png"));
