@@ -167,18 +167,16 @@ public class Player extends GameObject {
 			if (right) {
 				// Right
 				// SpaceInvadersGame.log("Got direction: Right; Going Right");
-				this.setDx((this.getDx() + Config.PLAYER_SPEED)
-						* Config.PLAYER_FRICTION);
+				this.setDx((this.getDx() + Config.PLAYER_SPEED));
 			} //else if (xAxis.equals(IDirection.NEG)) {
 			else if (left) {
 				// Left
 				// SpaceInvadersGame.log("Got direction: Left; Going left");
-				this.setDx((this.getDx() - Config.PLAYER_SPEED)
-						* Config.PLAYER_FRICTION);
-			} else {
-				// Drag
-				this.setDx(this.getDx() * Config.PLAYER_FRICTION);
+				this.setDx((this.getDx() - Config.PLAYER_SPEED));
 			}
+			// Drag
+			this.setDx(this.getDx() * Config.PLAYER_FRICTION);
+			
 		}
 		// YAXIS direction account
 		if (this.getDy() <= Config.PLAYER_MAX_SPEED) {
@@ -186,17 +184,15 @@ public class Player extends GameObject {
 			if (down) {
 				// Down
 				// SpaceInvadersGame.log("Got direction: Down; Going Down");
-				this.setDy((this.getDy() + Config.PLAYER_SPEED)
-						* Config.PLAYER_FRICTION);
+				this.setDy((this.getDy() + Config.PLAYER_SPEED));
 			} //else if (yAxis.equals(IDirection.POS)) {
 			else if (up)
 				// Up
 				// SpaceInvadersGame.log("Got direction: Up; Going Up");
-				this.setDy((this.getDy() - Config.PLAYER_SPEED)
-						* Config.PLAYER_FRICTION);
-			} else {
-				// Drag
-				this.setDy(this.getDy() * Config.PLAYER_FRICTION);
+				this.setDy((this.getDy() - Config.PLAYER_SPEED));
+			
+			// Drag
+			this.setDy(this.getDy() * Config.PLAYER_FRICTION);
 			}
 		// Move
 		this.setX(this.getX() + this.getDx());
